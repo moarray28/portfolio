@@ -133,60 +133,59 @@ export default function Content() {
   <div className='m-5 mt-10 p-4 md:p-6 h-auto'>
     <h1 className='text-2xl md:text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Projects</h1>
     <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
-      {/* Add project content here */}
+    {/* Add project content here */}
 
-      
-
-     
-     <div class="p-5">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-         <div class="max-w-sm bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-            <img class="rounded-t-lg w-full h-48 object-cover" src={weatherapp} alt="Weather App" />
-            <div class="p-5">
-                <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
-                <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
-                    Photon is a web-based platform for having current and future weather reports.
-                </p>
-                <a href="https://github.com/moarray28/weatherapp" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
-                    See Code
-                </a>
+    <div class="p-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="flex justify-center">
+            <div class="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+                <img class="rounded-t-lg w-full h-48 object-cover" src={weatherapp} alt="Weather App" />
+                <div class="p-5">
+                    <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
+                    <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
+                        Photon is a web-based platform for having current and future weather reports.
+                    </p>
+                    <a href="https://github.com/moarray28/weatherapp" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Code
+                    </a>
+                </div>
+                </div>
             </div>
-        </div>
-   
-        <div class="max-w-sm bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-            <img class="rounded-t-lg w-full h-48 object-cover" src={notesapp} alt="Weather App" />
-            <div class="p-5">
-                <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
-                <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
-                     A notes app where one can save daily notes and check and uncheck daily goals.
-                     </p>
-                <a href="https://github.com/moarray28/notesapp" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
-                    See Code
-                </a>
+            <div class="flex justify-center">
+            <div class="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+                <img class="rounded-t-lg w-full h-48 object-cover" src={notesapp} alt="Notes App" />
+                <div class="p-5">
+                    <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
+                    <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
+                        A notes app where one can save daily notes and check and uncheck daily goals.
+                    </p>
+                    <a href="https://github.com/moarray28/notesapp" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Code
+                    </a>
+                </div>
             </div>
-        </div>
-     
-        <div class="max-w-sm bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-            <img class="rounded-t-lg w-full h-48 object-cover" src={snlgame} alt="Weather App" />
-            <div class="p-5">
-                <h5 class="mb-2 text-2xl   tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
-                <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
-                    A traditional board game as desktop application . <br />
-                    It is created using Core Java
-                     </p>
-                <a href="https://github.com/moarray28/snlgame" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
-                    See Code
-                </a>
             </div>
+            
+            <div class="flex justify-center">
+    <div class="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+        <img class="rounded-t-lg w-full h-48 object-cover" src={snlgame} alt="Snakes & Ladder Game" />
+        <div class="p-5"> 
+            <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
+            <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
+                A traditional board game as a desktop application. <br />
+                It is created using Core Java
+            </p>
+            <a href="https://github.com/moarray28/snlgame" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                See Code
+            </a>
         </div>
     </div>
 </div>
 
+        </div>
+    </div>
+</div>
 
-
-
-       </div>
   </div>
 </section>
 
