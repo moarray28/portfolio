@@ -65,43 +65,42 @@ export default function Content() {
 
 
 
-      {/* About Section */}
-
-      <section id="about">      <div className=' mx-auto mb-10 h-screen'>
-        <span className='text-3xl my-5 block hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>About Me</span>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 m-5 rounded-2xl text-light-text dark:text-dark-text bg-dark-gradient dark:bg-light-gradient p-8'>
-          <div className='bg-slate-950 text-xl text-left w-full text-amber-50 rounded-lg p-7 px-10'>
-            <span className='text-yellow-400'>let </span>
-            <span className='text-orange-400'>profile </span>
-            = &nbsp; <span className='text-yellow-400'>&#123; </span> <br />
-            &nbsp; &nbsp; &nbsp; <span className='text-green-400'>name </span>:
-            <span className='text-teal-200'>"Ritesh Ravindra More" </span>
-            <span className='text-yellow-400'>, </span> <br />
-            &nbsp; &nbsp; &nbsp; <span className='text-green-400'>job </span>:
-            <span className='text-teal-200'>"Front End Developer" </span>
-            <span className='text-yellow-400'>, </span> <br />
-            &nbsp; &nbsp; &nbsp; <span className='text-green-400'>education </span>:
-            <span className='text-teal-200'>"Bsc IT" </span>
-            <span className='text-yellow-400'>, </span> <br />
-            &nbsp; &nbsp; &nbsp; <span className='text-green-400'>location </span>:
-            <span className='text-teal-200'>"Mumbai" </span>
-            <span className='text-yellow-400'> <br />&#125; </span>
-          </div>
-          <div className=' p-7 rounded-lg text-left text-2xl dark:text-light-text text-dark-text'>
-            Hi, I'm Ritesh Ravindra More, a passionate Frontend Developer with a knack for crafting dynamic and user-friendly web experiences. With a solid foundation in JavaScript and a keen eye for detail, I specialize in building intuitive interfaces and robust applications.
-            
-          </div>
-        </div>
+  {/* About Section */}
+ {/* About Section */}
+<section id="about">
+  <div className='mx-auto mb-10 p-5 h-auto'>
+    <span className='text-2xl md:text-3xl my-5 block hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>About Me</span>
+    <div className='grid grid-cols-1 gap-5 rounded-2xl text-light-text dark:text-dark-text bg-dark-gradient dark:bg-light-gradient p-5 md:p-8'>
+      <div className='bg-slate-950 text-base md:text-xl text-left w-full text-amber-50 rounded-lg p-5 md:p-7 px-5 md:px-10'>
+        <span className='text-yellow-400'>let </span>
+        <span className='text-orange-400'>profile </span>
+        = &nbsp; <span className='text-yellow-400'>&#123; </span> <br />
+        &nbsp; &nbsp; &nbsp; <span className='text-green-400'>name </span>:
+        <span className='text-teal-200'>"Ritesh Ravindra More" </span>
+        <span className='text-yellow-400'>, </span> <br />
+        &nbsp; &nbsp; &nbsp; <span className='text-green-400'>job </span>:
+        <span className='text-teal-200'>"Front End Developer" </span>
+        <span className='text-yellow-400'>, </span> <br />
+        &nbsp; &nbsp; &nbsp; <span className='text-green-400'>education </span>:
+        <span className='text-teal-200'>"Bsc IT" </span>
+        <span className='text-yellow-400'>, </span> <br />
+        &nbsp; &nbsp; &nbsp; <span className='text-green-400'>location </span>:
+        <span className='text-teal-200'>"Mumbai" </span>
+        <span className='text-yellow-400'> <br />&#125; </span>
       </div>
+      <div className='text-base md:text-2xl p-5 md:p-7 rounded-lg text-left dark:text-light-text text-dark-text'>
+        Hi, I'm Ritesh Ravindra More, a passionate Frontend Developer with a knack for crafting dynamic and user-friendly web experiences. With a solid foundation in JavaScript and a keen eye for detail, I specialize in building intuitive interfaces and robust applications.
+      </div>
+    </div>
+  </div>
+</section>
 
-      </section>
- 
-      {/* Skills Section */}
-<section id="skills" className='pt-20'> {/* Added padding-top */}
+{/* Skills Section */}
+<section id="skills" className='pt-10 md:pt-20'>
   <div className='m-5 mt-10'>
-    <h1 className='text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Skills</h1>
-    <div className='p-12 text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
-      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6'>
+    <h1 className='text-2xl md:text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Skills</h1>
+    <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
         <Skills img={reactjs} imgtitle="React JS"/>
         <Skills img={html} imgtitle="HTML"/>
         <Skills img={css} imgtitle="CSS"/>
@@ -115,18 +114,15 @@ export default function Content() {
   </div>
 </section>
 
-
-
-<section id="projects"> 
-<div className='m-5 mt-10 h-screen'>
-  
-  <h1 className='text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Projects</h1>
-  <div className='p-12 text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
-   
-     </div>
-</div>
+{/* Projects Section */}
+<section id="projects">
+  <div className='m-5 mt-10 p-4 md:p-6 h-auto'>
+    <h1 className='text-2xl md:text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Projects</h1>
+    <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
+      {/* Add project content here */}
+    </div>
+  </div>
 </section>
-
 
    </>
   )
