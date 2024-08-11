@@ -1,0 +1,54 @@
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: 'Outfit';
+
+  }
+  
+@layer{
+  body{
+    @apply m-0 p-0 scroll-smooth;
+    /* to-slate-950 from-60% via-pink-950 from-pink-700 ; */
+  }
+
+ 
+  body {
+    @apply bg-light-gradient text-light-text;
+  }
+  
+  body.dark {
+    @apply bg-dark-gradient text-dark-text;
+  }
+}
+
+.blob-shape {
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, #ff0000 0%, #ff0000 40%, transparent 60%);
+  clip-path: path('M32.1,-56.5C43.2,-50.1,53.6,-39.6,58.5,-27.3C63.4,-15.1,62.7,-0.8,54.4,12.6C46.1,26,30.3,35.8,17.5,33.4C4.7,31,-6.4,15.3,-19.5,-1.3C-32.6,-17.9,-47.7,-36.1,-45.3,-50.5C-42.9,-65,-22.1,-64.7,-8.5,-54.1C5.1,-43.6,12.9,-22.7,32.1,-56.5Z');
+  transform: scale(1.5);
+}
+
+/*
+body {
+  background: var(--gradient-background);
+  color: var(--text-color);
+}
+
+
+[data-theme='dark'] {
+  --gradient-background: linear-gradient(125deg, #c01048, #4C0519,#1a0209);
+  --text-color: #ffffff;
+}
+
+[data-theme='light'] {
+  --gradient-background: linear-gradient(125deg,   #e9d8df, #d2b8bf,#261f21);
+  --text-color: #000000; 
+}*/
