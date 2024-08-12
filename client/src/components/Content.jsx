@@ -33,43 +33,27 @@ export default function Content() {
   return (
     <>
 
-    <div className='space-x-4'>  
-<div className="flex flex-col justify-center mt-6 md:flex-row m-4 p-3">
-  <div className="text-left text-xl md:text-4xl m-2 p-4 md:p-8 w-full md:w-1/2 h-auto md:h-screen">
+<div className='flex flex-col md:flex-row justify-center items-center space-x-4 m-4 p-3'>
+  <div className="text-left text-xl md:text-4xl m-2 p-4 md:p-8 w-full md:w-1/2">
     <div className="text-lg md:text-2xl mb-3 tracking-wide opacity-90">
-      Hey,I'm Ritesh More.
-
-      
+      Hey, I'm Ritesh More.
     </div>
-    <div className="text-left  md:text-3xl py-5 md:my-5">
+    <div className="text-left md:text-3xl py-5">
       A passionate Frontend Developer specializing in creating intuitive and visually stunning user experiences.
       <br />
-      <button className='bg-dark-gradient text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text'>Get in touch</button>
+      <button className='bg-dark-gradient text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text'>
+        Get in touch
+      </button>
     </div>
   </div>
   
-  <div className='  '>   
-    
- 
-  
-
-  
-  <div className='flex m-4 justify-center items-center'>
-  <img 
-    src={profile} 
-    className='w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover shadow-black shadow-2xl dark:shadow-stone-700 rounded-full' 
-    alt="" 
-  />
-</div>
-
- 
- 
- 
-</div>
- 
-</div>  
-
-
+  <div className='flex justify-center items-center w-full md:w-1/2'>
+    <img 
+      src={profile} 
+      className='w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover shadow-black shadow-2xl dark:shadow-stone-700 rounded-full' 
+      alt="Profile" 
+    />
+  </div>
 </div>
 
 
@@ -145,7 +129,7 @@ export default function Content() {
                     <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
                         Photon is a web-based platform for having current and future weather reports.
                     </p>
-                    <a href="https://github.com/moarray28/weatherapp" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                    <a href="https://github.com/moarray28/weatherapp/" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
                         See Code
                     </a>
                 </div>
