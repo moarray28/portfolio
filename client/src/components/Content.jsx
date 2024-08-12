@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import profile from '../assets/profile.png';
 import reactjs from '../assets/react.svg';
 import nodejs from '../assets/nodejs.svg';
@@ -17,23 +17,38 @@ import notesapp from '../assets/notesapp.png';
 import Skills from './Skills';
 import snlgame from '../assets/snlgame.png';
 import { Link } from 'react-scroll';
-
-
-
+import contactlight from '../assets/contactlight.gif'
+ 
 
 
 
 export default function Content() {
 
 
+  const [name,setName]= useState('');
+  const [email,setEmail]= useState('');
+  const [message,setMessage]=useState('');
   
   
 
+  const handleSubmit =(e)=>{
+    e.preventDefault();
+    console.log(name + " : name is getting saved");
+    console.log(email + " : email is getting saved");
+    console.log(message + " : message is getting saved");
+  
+
+      
+
+  }
+
+ 
 
   return (
     <>
-
-<div className='flex flex-col md:flex-row justify-center items-center space-x-4 m-4 p-3'>
+ 
+  
+<div className='flex flex-col  md:flex-row justify-center items-center space-x-4 m-4 p-3'>
   <div className="text-left text-xl md:text-4xl m-2 p-4 md:p-8 w-full md:w-1/2">
     <div className="text-lg md:text-2xl mb-3 tracking-wide opacity-90">
       Hey, I'm Ritesh More.
@@ -42,22 +57,20 @@ export default function Content() {
       A passionate Frontend Developer specializing in creating intuitive and visually stunning user experiences.
       <br />
       <button className='bg-dark-gradient text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text'>
-        Get in touch
+       <Link to="contact" smooth={true} duration={600}> Get in touch
+       </Link>
       </button>
     </div>
   </div>
   
   <div className='flex justify-center items-center w-full md:w-1/2'>
-    <img 
-      src={profile} 
-      className='w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover shadow-black shadow-2xl dark:shadow-stone-700 rounded-full' 
-      alt="Profile" 
-    />
+ 
+ <img src={profile} className="shake-vertical w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover shadow-lg rounded-full" alt="Profile Image" /> 
+ </div> 
+  
+  
   </div>
-</div>
-
-
-
+ 
   {/* About Section */}
  {/* About Section */}
 <section id="about">
@@ -83,7 +96,8 @@ export default function Content() {
       </div>
       <div className='text-base md:text-2xl p-5 md:p-7 rounded-lg text-left dark:text-light-text text-dark-text'>
         Hi, I'm Ritesh Ravindra More, a passionate Frontend Developer with a knack for crafting dynamic and user-friendly web experiences. With a solid foundation in JavaScript and a keen eye for detail, I specialize in building intuitive interfaces and robust applications.
-      </div>
+        
+         </div>
     </div>
   </div>
 </section>
@@ -119,14 +133,14 @@ export default function Content() {
     <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
     {/* Add project content here */}
 
-    <div class="p-5">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="flex justify-center">
-            <div class="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img class="rounded-t-lg w-full h-48 object-cover" src={weatherapp} alt="Weather App" />
-                <div class="p-5">
-                    <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
-                    <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
+    <div className="p-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex justify-center">
+            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+                <img className="rounded-t-lg w-full h-48 object-cover" src={weatherapp} alt="Weather App" />
+                <div className="p-5">
+                    <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
+                    <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
                         Photon is a web-based platform for having current and future weather reports.
                     </p>
                     <a href="https://github.com/moarray28/weatherapp/" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
@@ -135,12 +149,12 @@ export default function Content() {
                 </div>
                 </div>
             </div>
-            <div class="flex justify-center">
-            <div class="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img class="rounded-t-lg w-full h-48 object-cover" src={notesapp} alt="Notes App" />
-                <div class="p-5">
-                    <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
-                    <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
+            <div className="flex justify-center">
+            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+                <img className="rounded-t-lg w-full h-48 object-cover" src={notesapp} alt="Notes App" />
+                <div className="p-5">
+                    <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
+                    <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
                         A notes app where one can save daily notes and check and uncheck daily goals.
                     </p>
                     <a href="https://github.com/moarray28/notesapp" target='_blank' className="inline-flex text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
@@ -150,12 +164,12 @@ export default function Content() {
             </div>
             </div>
             
-            <div class="flex justify-center">
-    <div class="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-        <img class="rounded-t-lg w-full h-48 object-cover" src={snlgame} alt="Snakes & Ladder Game" />
-        <div class="p-5"> 
-            <h5 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
-            <p class="mb-3 font-normal text-slate-900 dark:text-stone-300">
+            <div className="flex justify-center">
+    <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+        <img className="rounded-t-lg w-full h-48 object-cover" src={snlgame} alt="Snakes & Ladder Game" />
+        <div className="p-5"> 
+            <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
+            <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
                 A traditional board game as a desktop application. <br />
                 It is created using Core Java
             </p>
@@ -172,6 +186,46 @@ export default function Content() {
 
   </div>
 </section>
+
+
+
+
+
+
+<section id='contact'>
+
+<span className='text-2xl md:text-3xl my-5 block hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Contact Me</span>
+   
+
+<div className="w-full max-w-6xl p-6 bg-dark-gradient dark:bg-light-gradient rounded-xl shadow-2xl">
+    <div className="flex flex-col md:flex-row">
+ 
+      <div className="flex-1 p-4 flex justify-center items-center md:order-1">
+        <img src={contactlight} alt="Loading GIF" className="w-2/3 rounded-full shadow-lg" />
+      </div>
+ 
+      <div className="flex-1 p-4 md:order-2 flex flex-col justify-center">
+       
+         <form className="flex flex-col space-y-4" >
+          <div >
+            <input type="text" id="name"  value={name} onChange={(e)=>{setName(e.target.value)}} name="name" placeholder="Your Name" className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-100 focus:border-rose-200 sm:text-sm text-gray-900" required />
+          </div>
+          <div className="mb-4">
+            <input type="email" id="email"  value={email} onChange={(e)=>{setEmail(e.target.value)}}   name="email" placeholder="Your Email" className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-100 focus:border-rose-200 sm:text-sm text-gray-900" required />
+          </div>
+          <div className="mb-4">
+            <textarea id="description"   value={message} onChange={(e)=>{setMessage(e.target.value)}} name="description" rows="4" placeholder="Your Message" className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-100 focus:border-rose-200 sm:text-sm text-gray-900" required></textarea>
+          </div>
+          <button type="submit" onClick={handleSubmit}className="w-full px-4 tracking-widest py-2 bg-light-gradient text-slate-950 dark:bg-dark-gradient dark:text-gray-200 font-semibold rounded-md shadow-sm hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+ </section>
 
    </>
   )
