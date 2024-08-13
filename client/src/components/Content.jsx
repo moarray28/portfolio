@@ -29,26 +29,41 @@ export default function Content() {
   const [email,setEmail]= useState('');
   const [message,setMessage]=useState('');
   
-  
+  const [status, setStatus] = useState('');
 
-  const handleSubmit =(e)=>{
+
+  const frontendurl= import.meta.env.VITE_BACKEND_URL;
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name + " : name is getting saved");
-    console.log(email + " : email is getting saved");
-    console.log(message + " : message is getting saved");
-  
 
-      
+    const response = await fetch(`${frontendurl}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, message }),
+    });
 
-  }
+    if (response.ok) {
+      setStatus('Message sent Successfully');
+      setName('');
+      setEmail('');
+      setMessage('');
 
+      setTimeout(() => {
+        setStatus('');
+      }, 2500);
+    } else {
+      setStatus('Failed to send message');
+    }
+  };
  
 
   return (
     <>
  
   
-<div className='flex flex-col  md:flex-row justify-center items-center space-x-4 m-4 p-3'>
+<div className='flex flex-col mt-10  md:flex-row justify-center items-center space-x-4 m-4 p-3'>
   <div className="text-left text-xl md:text-4xl m-2 p-4 md:p-8 w-full md:w-1/2">
     <div className="text-lg md:text-2xl mb-3 tracking-wide opacity-90">
       Hey, I'm Ritesh More.
@@ -74,7 +89,7 @@ export default function Content() {
   {/* About Section */}
  {/* About Section */}
 <section id="about">
-  <div className='mx-auto mb-10 p-5 h-auto'>
+  <div className='mx-auto mt-10 mb-10 p-5 h-auto'>
     <span className='text-2xl md:text-3xl my-5 block hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>About Me</span>
     <div className='grid grid-cols-1 gap-5 rounded-2xl text-light-text dark:text-dark-text bg-dark-gradient dark:bg-light-gradient p-5 md:p-8'>
       <div className='bg-slate-950 text-base md:text-xl text-left w-full text-amber-50 rounded-lg p-5 md:p-7 px-5 md:px-10'>
@@ -206,7 +221,7 @@ export default function Content() {
  
       <div className="flex-1 p-4 md:order-2 flex flex-col justify-center">
        
-         <form className="flex flex-col space-y-4" >
+         <form className="flex flex-col space-y-4" onSubmit={handleSubmit} >
           <div >
             <input type="text" id="name"  value={name} onChange={(e)=>{setName(e.target.value)}} name="name" placeholder="Your Name" className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-100 focus:border-rose-200 sm:text-sm text-gray-900" required />
           </div>
@@ -216,9 +231,13 @@ export default function Content() {
           <div className="mb-4">
             <textarea id="description"   value={message} onChange={(e)=>{setMessage(e.target.value)}} name="description" rows="4" placeholder="Your Message" className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-100 focus:border-rose-200 sm:text-sm text-gray-900" required></textarea>
           </div>
-          <button type="submit" onClick={handleSubmit}className="w-full px-4 tracking-widest py-2 bg-light-gradient text-slate-950 dark:bg-dark-gradient dark:text-gray-200 font-semibold rounded-md shadow-sm hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
+          <button type="submit" className="w-full px-4 tracking-widest py-2 bg-light-gradient text-slate-950 dark:bg-dark-gradient dark:text-gray-200 font-semibold rounded-md shadow-sm hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
             Send
           </button>
+
+          <span className='font-semibold tracking-wider dark:text-gray-950 text-slate-50 '>
+          {status && <p>{status}</p>}
+            </span>
         </form>
       </div>
     </div>

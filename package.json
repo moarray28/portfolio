@@ -7,8 +7,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "framer-motion": "^11.3.24"
-  }
+  "license": "ISC"
 }

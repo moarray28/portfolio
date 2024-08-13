@@ -148,8 +148,8 @@ const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matche
      <div className=" overflow-y-auto sticky">
      <nav className="border-gray-200 rounded-xl sticky top-0 z-50  shadow-md">
        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-         <span className="text-3xl hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer">
-           Ritesh More
+         <span className="text-3xl hover:tracking-widest hover:scale-125 hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer">
+           moarray
          </span>
  
          <button
