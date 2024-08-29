@@ -31,7 +31,10 @@
 
 
 /** Animations*/ 
+.pulsate-bck{animation:pulsate-bck 2.1s ease-in-out infinite both}
 
+
+ @keyframes pulsate-bck{0%{transform:scale(1)}50%{transform:scale(.9)}100%{transform:scale(1)}}
 
 .shake-vertical{animation:shake-vertical 15s ease-in-out .5s infinite alternate-reverse forwards}
 

@@ -18,7 +18,7 @@ import Skills from './Skills';
 import snlgame from '../assets/snlgame.png';
 import { Link } from 'react-scroll';
 import contactlight from '../assets/contactlight.gif'
- 
+import gameapp from '../assets/gameapp.png'
 
 
 
@@ -150,6 +150,28 @@ export default function Content() {
 
     <div className="p-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div className="flex justify-center">
+            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+                <img className="rounded-t-lg w-full h-48 object-cover" src={gameapp} alt="Notes App" />
+                <div className="p-5">
+                    <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Game Listing App</h5>
+                    <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
+                        A Listing app where one can see daily updates on games and have information about it. 
+                        
+                    </p>
+                    
+                    <a href="https://epicplay-moarray28s-projects.vercel.app/" target='_blank' className="inline-flex pulsate-bck text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Live
+                    </a>
+                    <a href="https://github.com/moarray28/gamelisting" target='_blank' className="inline-flex text-white mx-2 items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Code
+                    </a>
+                </div>
+            </div>
+            </div>
+
+
         <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
                 <img className="rounded-t-lg w-full h-48 object-cover" src={weatherapp} alt="Weather App" />
@@ -164,6 +186,8 @@ export default function Content() {
                 </div>
                 </div>
             </div>
+
+            
             <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
                 <img className="rounded-t-lg w-full h-48 object-cover" src={notesapp} alt="Notes App" />
