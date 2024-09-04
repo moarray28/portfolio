@@ -155,7 +155,7 @@ export default function Content() {
             
         <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img className="rounded-t-lg w-full h-48 object-cover" src={notesapp} alt="Notes App" />
+                <img className="rounded-t-lg w-full h-48 object-cover hover:brightness-110 transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
                 <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
                     <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
@@ -174,7 +174,7 @@ export default function Content() {
             
         <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img className="rounded-t-lg w-full h-48 object-cover" src={gameapp} alt="Notes App" />
+                <img className="rounded-t-lg w-full h-48 hover:brightness-110 object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={gameapp} alt="Notes App" />
                 <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Game Listing App</h5>
                     <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
@@ -195,7 +195,7 @@ export default function Content() {
 
         <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img className="rounded-t-lg w-full h-48 object-cover" src={weatherapp} alt="Weather App" />
+                <img className="rounded-t-lg w-full h-48 object-cover hover:brightness-110 transition-transform duration-300 ease-in-out transform hover:scale-125" src={weatherapp} alt="Weather App" />
                 <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
                     <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
@@ -211,7 +211,7 @@ export default function Content() {
             
             <div className="flex justify-center">
     <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-        <img className="rounded-t-lg w-full h-48 object-cover" src={snlgame} alt="Snakes & Ladder Game" />
+        <img className="rounded-t-lg w-full h-48 object-cover hover:brightness-110 transition-transform duration-300 ease-in-out transform hover:scale-125" src={snlgame} alt="Snakes & Ladder Game" />
         <div className="p-5"> 
             <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
             <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
