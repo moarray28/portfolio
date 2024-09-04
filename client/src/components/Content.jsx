@@ -159,7 +159,7 @@ export default function Content() {
                 <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
                     <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
-                        A notes app where one can save daily notes and check and uncheck daily goals.
+                        A MERN stack notes app where one can save ,check and uncheck daily goals.
                     </p>
                     <a href="https://todoclient-g4au.onrender.com" target='_blank' className="inline-flex pulsate-bck text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
                         See Live
