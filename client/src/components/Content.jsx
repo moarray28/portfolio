@@ -178,6 +178,7 @@ export default function Content() {
         <div className="relative overflow-hidden rounded-t-lg h-48">
             <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
         </div>
+
         <div className="p-5">
             <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
             <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
@@ -196,8 +197,11 @@ export default function Content() {
             
         <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img className="rounded-t-lg w-full h-48 hover:brightness-110 object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={gameapp} alt="Notes App" />
-                <div className="p-5">
+                
+        <div className="relative overflow-hidden rounded-t-lg h-48">
+            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={gameapp} alt="Notes App" />
+        </div>
+        <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Game Listing App</h5>
                     <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
                         A Listing app where one can see daily updates on games and have information about it. 
@@ -217,8 +221,11 @@ export default function Content() {
 
         <div className="flex justify-center">
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img className="rounded-t-lg w-full h-48 object-cover hover:brightness-110 transition-transform duration-300 ease-in-out transform hover:scale-125" src={weatherapp} alt="Weather App" />
-                <div className="p-5">
+              
+        <div className="relative overflow-hidden rounded-t-lg h-48">
+            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={weatherapp} alt="Notes App" />
+        </div>
+          <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
                     <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
                         Photon is a web-based platform for having current and future weather reports.
@@ -233,8 +240,11 @@ export default function Content() {
             
             <div className="flex justify-center">
     <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-        <img className="rounded-t-lg w-full h-48 object-cover hover:brightness-110 transition-transform duration-300 ease-in-out transform hover:scale-125" src={snlgame} alt="Snakes & Ladder Game" />
-        <div className="p-5"> 
+       
+    <div className="relative overflow-hidden rounded-t-lg h-48">
+            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={snlgame} alt="Notes App" />
+        </div>
+         <div className="p-5"> 
             <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
             <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
                 A traditional board game as a desktop application. <br />
