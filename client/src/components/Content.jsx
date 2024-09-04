@@ -176,7 +176,7 @@ export default function Content() {
     <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
         
         <div className="relative overflow-hidden rounded-t-lg h-48">
-            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" src={notesapp} alt="Notes App" />
+            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
         </div>
         <div className="p-5">
             <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
