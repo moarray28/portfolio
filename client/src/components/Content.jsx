@@ -173,7 +173,7 @@ export default function Content() {
             </div> */}
 
 <div className="flex justify-center">
-    <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+    <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
         
         <div className="relative overflow-hidden rounded-t-lg h-48">
             <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
@@ -196,7 +196,7 @@ export default function Content() {
 
             
         <div className="flex justify-center">
-            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
                 
         <div className="relative overflow-hidden rounded-t-lg h-48">
             <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={gameapp} alt="Notes App" />
@@ -220,7 +220,7 @@ export default function Content() {
 
 
         <div className="flex justify-center">
-            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
               
         <div className="relative overflow-hidden rounded-t-lg h-48">
             <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={weatherapp} alt="Notes App" />
@@ -239,7 +239,7 @@ export default function Content() {
 
             
             <div className="flex justify-center">
-    <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
+    <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
        
     <div className="relative overflow-hidden rounded-t-lg h-48">
             <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={snlgame} alt="Notes App" />
