@@ -176,7 +176,7 @@ export default function Content() {
     <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
         
         <div className="relative overflow-hidden rounded-t-lg h-48">
-            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
+            <img className="absolute  cursor-pointer inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
         </div>
 
         <div className="p-5">
@@ -199,7 +199,7 @@ export default function Content() {
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
                 
         <div className="relative overflow-hidden rounded-t-lg h-48">
-            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={gameapp} alt="Notes App" />
+            <img className="absolute  cursor-pointer inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={gameapp} alt="Notes App" />
         </div>
         <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Game Listing App</h5>
@@ -223,7 +223,7 @@ export default function Content() {
             <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
               
         <div className="relative overflow-hidden rounded-t-lg h-48">
-            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={weatherapp} alt="Notes App" />
+            <img className="absolute inset-0 w-full h-full cursor-pointer object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={weatherapp} alt="Notes App" />
         </div>
           <div className="p-5">
                     <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Weather App</h5>
@@ -242,7 +242,7 @@ export default function Content() {
     <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
        
     <div className="relative overflow-hidden rounded-t-lg h-48">
-            <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={snlgame} alt="Notes App" />
+            <img className="absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-125" src={snlgame} alt="Notes App" />
         </div>
          <div className="p-5"> 
             <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Snakes & Ladder Game</h5>
@@ -293,7 +293,7 @@ export default function Content() {
           <div className="mb-4">
             <textarea id="description"   value={message} onChange={(e)=>{setMessage(e.target.value)}} name="description" rows="4" placeholder="Your Message" className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-100 focus:border-rose-200 sm:text-sm text-gray-900" required></textarea>
           </div>
-          <button type="submit" className="w-full px-4 tracking-widest py-2 bg-light-gradient text-slate-950 dark:bg-dark-gradient dark:text-gray-200 font-semibold rounded-md shadow-sm hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
+          <button type="submit" className="w-full px-4 tracking-widest py-2 bg-light-gradient text-slate-950 dark:bg-dark-gradient dark:text-gray-200 font-semibold rounded-md shadow-sm  focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
             Send
           </button>
 
