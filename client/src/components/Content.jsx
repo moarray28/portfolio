@@ -20,7 +20,20 @@ import { Link } from 'react-scroll';
 import contactlight from '../assets/contactlight.gif'
 import gameapp from '../assets/gameapp.png'
 
-
+const skills = [
+  { img: reactjs, imgtitle: "React JS" },
+  { img: html, imgtitle: "HTML" },
+  { img: css, imgtitle: "CSS" },
+  { img: javascript, imgtitle: "Javascript" },
+  { img: nodejs, imgtitle: "Node JS" },
+  { img: java, imgtitle: "Java" },
+  { img: tailwind, imgtitle: "Tailwind CSS" },
+  { img: bootstrap, imgtitle: "Bootstrap" },
+  { img: mongodb, imgtitle: "MongoDB" },
+  { img: express, imgtitle: "Express" },
+  { img: json, imgtitle: "JSON" },
+  { img: redux, imgtitle: "Redux" },
+];
 
 export default function Content() {
 
@@ -123,19 +136,9 @@ export default function Content() {
     <h1 className='text-2xl md:text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Skills</h1>
     <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6'>
-        <Skills img={reactjs} imgtitle="React JS"/>
-        <Skills img={html} imgtitle="HTML"/>
-        <Skills img={css} imgtitle="CSS"/>
-        <Skills img={javascript} imgtitle="Javascript"/>
-        <Skills img={nodejs} imgtitle="Node JS"/>
-        <Skills img={java} imgtitle="Java"/>
-        <Skills img={tailwind} imgtitle="Tailwind CSS"/>
-        <Skills img={bootstrap} imgtitle="Bootstrap"/>
-        <Skills img={mongodb} imgtitle="MongoDB"/>
-        <Skills img={express} imgtitle="Express"/>
-        <Skills img={json} imgtitle="JSON"/>
-     
-        <Skills img={redux} imgtitle="Redux"/>
+      {skills.map((skill, index) => (
+          <Skills key={index} img={skill.img} imgtitle={skill.imgtitle} />
+        ))}
        </div>
     </div>
   </div>

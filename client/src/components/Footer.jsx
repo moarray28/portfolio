@@ -1,4 +1,5 @@
 import React from 'react'
+import leetcode from "../assets/leetcode.svg";
 
 export default function Footer() {
   return (
@@ -22,7 +23,23 @@ export default function Footer() {
     
     <a href="https://www.instagram.com/moarray/" target="_blank" rel="noopener noreferrer" className="text-5xl cursor-pointer hover:text-dark-text dark:hover:text-teal-200 transition-colors">
     <ion-icon name="logo-instagram"></ion-icon>
-  </a>  </div>
+  </a> 
+  
+  <a
+  href="https://leetcode.com/u/morray28/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-5xl cursor-pointer hover:text-dark-text dark:hover:text-teal-200 transition-colors"
+>
+  <img 
+    src={leetcode} 
+    className="h-10 w-10  hover:text-dark-text dark:hover:text-teal-200 transition-all"
+    alt="LeetCode logo"
+  />
+</a>
+
+  
+   </div>
         <div className="mt-4 text-center">
           <p className="text-sm">&copy; {new Date().getFullYear()} Ritesh More . All rights reserved.</p>
         </div>
