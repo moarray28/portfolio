@@ -66,7 +66,7 @@ app.get('/download/resume', (req, res) => {
 
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Server for newswave is running perfectly!  😊👍' });
+  res.json({ message: 'Server for portfolio is running perfectly!  😊👍' });
 });
 
 
