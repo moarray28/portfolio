@@ -20,6 +20,8 @@ import snlgame from '../assets/snlgame.png';
 import { Link } from 'react-scroll';
 import contactlight from '../assets/contactlight.gif'
 import gameapp from '../assets/gameapp.png'
+import newswave from '../assets/newswave.png'
+
 
 const skills = [
   { img: reactjs, imgtitle: "React JS" },
@@ -36,6 +38,58 @@ const skills = [
   { img: redux, imgtitle: "Redux" },
 ];
 
+const projects = [
+  {
+    id: 3,
+    image: elearn,
+    title: "Elearning Platform",
+    description: "Elearning platform for students and teachers for learning together.",
+    liveLink: "https://elearn-omega-three.vercel.app/",
+    codeLink: "https://github.com/moarray28/elearn",
+  },
+  {
+    id: 2,
+    image: newswave,
+    title: "Newswave - News Center",
+    description: "A news website with unique features like news search and high-end user engagement.",
+    liveLink: "https://newswave-eight.vercel.app/",
+    codeLink: "https://github.com/moarray28/newswave",
+  },
+  {
+    id: 1,
+    image: notesapp,
+    title: "Notes App",
+    description: "A MERN stack notes app where one can save, check, and uncheck daily goals.",
+    liveLink: "https://todoclient-g4au.onrender.com",
+    codeLink: "https://github.com/moarray28/todolist",
+  },
+  {
+    id: 4,
+    image: snlgame,
+    title: "Snakes & Ladder Game",
+    description: "A traditional board game as a desktop application. It is created using Core Java.",
+    liveLink: null, // No live link for this project
+    codeLink: "https://github.com/moarray28/snlgame",
+  },
+  {
+    id: 5,
+    image: gameapp,
+    title: "Game Listing App",
+    description: "A Listing app where one can see daily updates on games and have information about it.",
+    liveLink: "https://epicplay-moarray28s-projects.vercel.app/",
+    codeLink: "https://github.com/moarray28/gamelisting",
+  },
+  {
+    id: 6,
+    image: weatherapp,
+    title: "Weather App",
+    description: "Photon is a web-based platform for having current and future weather reports.",
+    liveLink: "https://github.com/moarray28/weatherapp/",
+    codeLink: "https://github.com/moarray28/weatherapp/",
+  },
+];
+
+
 export default function Content() {
 
 
@@ -45,12 +99,13 @@ export default function Content() {
   
   const [status, setStatus] = useState('');
 
-
-  const frontendurl= import.meta.env.VITE_BACKEND_URL;
+  
+  
+  const backendurl= import.meta.env.VITE_BACKEND_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${frontendurl}/api/contact`, {
+    const response = await fetch(`${backendurl}/api/contact`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,7 +126,30 @@ export default function Content() {
       setStatus('Failed to send message');
     }
   };
- 
+
+  const downloadResume = async () => {
+    try {
+      const response = await fetch(`${backendurl}/download/resume`);
+      
+      // Ensure the response is valid (status 200)
+      if (!response.ok) {
+        throw new Error('Failed to fetch the resume');
+      }
+  
+      const blob = await response.blob(); // Convert the response to a Blob
+  
+      const link = document.createElement('a'); // Create an <a> element to trigger download
+      const url = window.URL.createObjectURL(blob); // Create a URL for the Blob
+      link.href = url;
+      link.setAttribute('download', 'RiteshsResume.pdf'); // Set the filename
+      document.body.appendChild(link);
+      link.click(); // Trigger the click to download the file
+      document.body.removeChild(link); // Clean up the DOM by removing the link
+    } catch (error) {
+      console.error('Error downloading the file:', error); // Log any errors
+    }
+  };
+   
 
   return (
     <>
@@ -85,10 +163,19 @@ export default function Content() {
     <div className="text-left md:text-3xl py-5">
       A passionate Frontend Developer specializing in creating intuitive and visually stunning user experiences.
       <br />
-      <button className='bg-dark-gradient text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text'>
-       <Link to="contact" smooth={true} duration={600}> Get in touch
-       </Link>
-      </button>
+       
+      <button className="bg-dark-gradient text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text w-full sm:w-auto">
+  <Link to="contact" smooth={true} duration={600}> Get in touch </Link>
+</button>
+
+<button
+  className="bg-dark-gradient mx-2 text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text w-full sm:w-auto"
+  onClick={downloadResume}
+>
+  Get My Resume
+</button>
+
+
     </div>
   </div>
   
@@ -146,35 +233,15 @@ export default function Content() {
 </section>
 
 {/* Projects Section */}
+{/* 
 <section id="projects">
   <div className='m-5 mt-10 p-4 md:p-6 h-auto'>
     <h1 className='text-2xl md:text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>Projects</h1>
     <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
-    {/* Add project content here */}
+    {/* Add project content here 
 
     <div className="p-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-
-            {/**  
-        <div className="flex justify-center">
-            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-slate-950 dark:border-gray-800">
-                <img className="rounded-t-lg w-full h-48 object-cover hover:brightness-110 transition-transform duration-300 ease-in-out transform hover:scale-125" src={notesapp} alt="Notes App" />
-                <div className="p-5">
-                    <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Notes App</h5>
-                    <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
-                        A MERN stack notes app where one can save ,check and uncheck daily goals.
-                    </p>
-                    <a href="https://todoclient-g4au.onrender.com" target='_blank' className="inline-flex pulsate-bck text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
-                        See Live
-                    </a>
-                   
-                    <a href="https://github.com/moarray28/todolist" target='_blank' className="inline-flex text-white mx-2 items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
-                        See Code
-                    </a>
-                </div>
-            </div>
-            </div> */}
 
 <div className="flex justify-center">
     <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
@@ -297,8 +364,44 @@ export default function Content() {
 </section>
 
 
+ */}
 
 
+
+<section id="projects">
+      <div className='m-5 mt-10 p-4 md:p-6 h-auto'>
+        <h1 className='text-2xl md:text-3xl my-5 hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer'>
+          Projects
+        </h1>
+        <div className='p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl'>
+          <div className="p-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project) => (
+                <div key={project.id} className="flex justify-center">
+                  <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
+                    <div className="relative overflow-hidden rounded-t-lg h-48">
+                      <img className="absolute cursor-pointer inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={project.image} alt={project.title} />
+                    </div>
+                    <div className="p-5">
+                      <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">{project.title}</h5>
+                      <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">{project.description}</p>
+                      {project.liveLink && (
+                        <a href={project.liveLink} target='_blank' rel="noopener noreferrer" className="inline-flex pulsate-bck text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                          See Live
+                        </a>
+                      )}
+                      <a href={project.codeLink} target='_blank' rel="noopener noreferrer" className="inline-flex text-white mx-2 items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Code
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 <section id='contact'>

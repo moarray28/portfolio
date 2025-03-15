@@ -1,7 +1,10 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const path = require('path'); 
 require('dotenv').config();
+
 const cors = require('cors');
 
 const app = express();
@@ -9,6 +12,7 @@ const port = 3000; // Use the port from environment variables if available
 
 app.use(cors({
   origin: process.env.VITE_FRONTEND_URL || '*', // Fallback to '*' if not defined
+  methods: ['GET', 'POST'],
   credentials: true
 }));
 
@@ -44,6 +48,19 @@ app.post('/api/contact', async (req, res) => {
     console.error('Error sending email:', error);
     res.status(500).json({ message: 'Failed to send message' });
   }
+});
+
+
+const resumeFilePath = path.join(__dirname, 'resume.pdf');  // Use path.join for accurate file path
+
+// Endpoint to download the resume
+app.get('/download/resume', (req, res) => {
+  res.download(resumeFilePath, 'YourResume.pdf', (err) => {
+    if (err) {
+      console.error(err);  // Log the error to see what went wrong
+      res.status(500).send('File not found or error in downloading');
+    }
+  });
 });
 
 app.listen(port, () => {

@@ -5,19 +5,7 @@ import { Link } from 'react-scroll';
 
 export default function Navbar() {
   
-  /*const [isDarkMode, setIsDarkMode] = useState(() =>
-    document.body.classList.contains('dark')
-  );
-
-  useEffect(() => {
-    // Apply the dark mode class to the body
-    document.body.classList.toggle('dark', isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(prevMode => !prevMode);
-  };
-*/
+ 
 const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   // Set initial state based on system preference or local storage
