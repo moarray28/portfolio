@@ -12,7 +12,7 @@ const port = 3000; // Use the port from environment variables if available
 
 app.use(cors({
   origin: process.env.VITE_FRONTEND_URL || '*', // Fallback to '*' if not defined
-  methods: ['GET', 'POST'],
+ 
   credentials: true
 }));
 
