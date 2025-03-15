@@ -15,6 +15,7 @@ import json from '../assets/json.svg';
 import weatherapp from '../assets/weatherapp.png';
 import notesapp from '../assets/notesapp.png';
 import Skills from './Skills';
+import elearn from '../assets/elearn.png';
 import snlgame from '../assets/snlgame.png';
 import { Link } from 'react-scroll';
 import contactlight from '../assets/contactlight.gif'
@@ -220,6 +221,34 @@ export default function Content() {
                 </div>
             </div>
             </div>
+
+
+
+            
+            
+        <div className="flex justify-center">
+            <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
+                
+        <div className="relative overflow-hidden rounded-t-lg h-48">
+            <img className="absolute  cursor-pointer inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125" src={elearn} alt="Notes App" />
+        </div>
+        <div className="p-5">
+                    <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">Elearning Platform</h5>
+                    <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
+                         Elearning platform for students and teachers. 
+                        
+                    </p>
+                    
+                    <a href="https://elearn-omega-three.vercel.app/" target='_blank' className="inline-flex pulsate-bck text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Live
+                    </a>
+                    <a href="https://github.com/moarray28/elearn" target='_blank' className="inline-flex text-white mx-2 items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800">
+                        See Code
+                    </a>
+                </div>
+            </div>
+            </div>
+
 
 
         <div className="flex justify-center">
