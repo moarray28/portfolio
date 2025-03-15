@@ -63,6 +63,13 @@ app.get('/download/resume', (req, res) => {
   });
 });
 
+
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Server for newswave is running perfectly!  😊👍' });
+});
+
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
