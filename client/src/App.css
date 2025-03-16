@@ -40,3 +40,75 @@
 .read-the-docs {
   color: #888;
 }
+
+
+
+
+
+
+
+
+
+
+/* Profile hover effect container with perspective */
+.profile-hover-effect {
+  perspective: 1500px;
+  position: relative; /* So that the child can position itself based on mouse position */
+  overflow: hidden; /* Hide overflow if the image moves out of the container */
+}
+
+.profile-hover-effect img {
+  transition: transform 0.1s ease-out; /* Smooth transition for the movement */
+  will-change: transform; /* Optimize performance for the transformation */
+  transform: perspective(1500px) rotateX(0deg) rotateY(0deg);
+  object-fit: cover; /* Ensure image covers the container without distortion */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.profile-hover-effect .profile-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: white;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.1s ease-out; /* Smooth transition for the opacity */
+}
+
+
+
+/* Define the typing animation */
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%; /* Ensure it takes the full width */
+  }
+}
+
+.typing-text {
+  overflow: hidden; /* Hide text until it's typed */
+  white-space: nowrap; /* Keep text in one line */
+  display: inline-block; /* Allow container to adjust its width to the text */
+  width: 0; /* Initial width, so text is hidden */
+  animation: typing 3s steps(40) 1s forwards, blink-caret 0.75s step-end infinite;
+}
+
+/* Optional: Add a blinking cursor effect */
+@keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typing-text::after {
+  content: '|'; /* Add the blinking cursor */
+  animation: blink-caret 0.75s step-end infinite;
+  border-right: 2px solid #000; /* Adjust cursor thickness */
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import profile from '../assets/profile.png';
 import reactjs from '../assets/react.svg';
 import nodejs from '../assets/nodejs.svg';
@@ -151,10 +151,45 @@ export default function Content() {
   };
    
 
+
+
+
+
+
+  const [transformStyle, setTransformStyle] = useState({
+    transform: 'perspective(1500px) rotateX(0deg) rotateY(0deg)',
+  });
+
+  // Handle mouse movement
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+
+    // Calculate the mouse position relative to the element
+    const offsetX = (clientX - left) / width;
+    const offsetY = (clientY - top) / height;
+
+    // Calculate rotation angles
+    const rotateX = (offsetY - 0.5) * 20; // 20 degrees rotation based on Y position
+    const rotateY = (offsetX - 0.5) * -20; // -20 degrees rotation based on X position
+
+    // Update the transform style
+    setTransformStyle({
+      transform: `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+    });
+  };
+
+  useEffect(() => {
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
     <>
  
-  
+{/*   
 <div className='flex flex-col mt-10  md:flex-row justify-center items-center space-x-4 m-4 p-3'>
   <div className="text-left text-xl md:text-4xl m-2 p-4 md:p-8 w-full md:w-1/2">
     <div className="text-lg md:text-2xl mb-3 tracking-wide opacity-90">
@@ -186,7 +221,77 @@ export default function Content() {
   
   
   </div>
- 
+  */}
+
+
+<div className="flex flex-col mt-10 md:flex-row justify-center items-center space-x-4 m-4 p-3">
+      <div className="text-left text-xl md:text-4xl m-2 p-4 md:p-8 w-full md:w-1/2">
+        <div className="text-lg md:text-2xl mb-3 tracking-wide opacity-90">
+          Hey, I'm Ritesh More.
+        </div>
+       
+       {/* Text with typing animation */}
+       <div className="text-left md:text-2xl py-5">
+          
+            <p>
+              A Frontend Developer specializing in creating intuitive and visually stunning user experiences.
+            </p>
+          
+          <br />
+          <button className="bg-dark-gradient text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text w-full sm:w-auto">
+            <Link to="contact" smooth={true} duration={600}> Get in touch </Link>
+          </button>
+          <button
+            className="bg-dark-gradient mx-2 text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text w-full sm:w-auto"
+            onClick={() => console.log("Download Resume")}
+          >
+            Get My Resume
+          </button>
+        </div>
+      </div>
+
+      <div
+        className="flex justify-center items-center p-4 w-full md:w-1/2 profile-hover-effect"
+        onMouseMove={handleMouseMove} // Attach mousemove event to capture mouse position
+      >
+        <img
+          src={profile}
+          className="w-46 h-46 md:w-64 md:h-64 lg:w-80 cursor-pointer lg:h-80 rounded-full shadow-xl shadow-black"
+          alt="Profile Image"
+          style={transformStyle} // Apply the dynamic transform style
+        />
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {/* About Section */}
  {/* About Section */}
 <section id="about">
