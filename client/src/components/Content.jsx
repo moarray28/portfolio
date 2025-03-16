@@ -234,7 +234,7 @@ export default function Content() {
        <div className="text-left md:text-2xl py-5">
           
             <p>
-              A Frontend Developer specializing in creating intuitive and visually stunning user experiences.
+              A  passionate Frontend Developer specializing in creating intuitive and visually stunning user experiences.
             </p>
           
           <br />
