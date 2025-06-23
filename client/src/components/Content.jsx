@@ -216,8 +216,8 @@ export default function Content() {
             Hey, I'm Ritesh More.
           </h2>
           <p className="text-lg md:text-xl text-light-text dark:text-dark-text opacity-90 leading-relaxed">
-            A passionate Frontend Developer specializing in creating intuitive
-            and visually stunning user experiences.
+            A passionate Developer specializing in creating 
+            intuitive and visually stunning user experiences.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
