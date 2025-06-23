@@ -16,6 +16,16 @@ export default {
         'light-text': '#000000', // Black for light theme
         'dark-text': '#ffffff',  // White for dark theme
       },
+       keyframes: {
+      bubble: {
+        '0%': { transform: 'scale(0)', opacity: '0' },
+        '80%': { transform: 'scale(1.2)', opacity: '1' },
+        '100%': { transform: 'scale(1)', opacity: '1' },
+      },
+    },
+    animation: {
+      'bubble-pop': 'bubble 1s ease-in-out forwards',
+    },
 
 
   },

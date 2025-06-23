@@ -1,50 +1,70 @@
-import React from 'react'
-import leetcode from "../assets/leetcode.svg";
+import React from 'react';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 
 export default function Footer() {
   return (
-    
-    <>
+    <footer className="w-full text-gray-950 dark:text-gray-100 mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10">
+        {/* Top content */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          
+          {/* About / Tagline */}
+          <div className="text-center md:text-left">
+            <h3 className="text-lg font-semibold tracking-wide">
+              Passionate about learning, building and breaking code.
+            </h3>
+          </div>
 
+          {/* Social Links */}
+          <div className="flex justify-center space-x-5 text-2xl md:text-3xl">
+            <a
+              href="https://github.com/moarray28"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="hover:scale-110 transform transition duration-300 hover:text-gray-900 dark:hover:text-teal-300"
+            >
+              <FaGithub />
+            </a>
 
-<footer className=" text-gray-800 dark:text-dark-text mt-5  py-6">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-center space-x-6">
+            <a
+              href="https://www.linkedin.com/in/ritesh-more-85ba46248/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="hover:scale-110 transform transition duration-300 hover:text-gray-900 dark:hover:text-teal-300"
+            >
+              <FaLinkedin />
+            </a>
 
-  <a href="https://github.com/moarray28" target="_blank" rel="noopener noreferrer" className="text-5xl cursor-pointer hover:text-dark-text dark:hover:text-teal-200 transition-colors">
-   
-  <ion-icon name="logo-github"></ion-icon> </a>
-  
-  
-    <a href="https://www.linkedin.com/in/ritesh-more-85ba46248/" target="_blank" rel="noopener noreferrer" className="text-5xl cursor-pointer hover:text-dark-text dark:hover:text-teal-200 transition-colors">
-    <ion-icon name="logo-linkedin"></ion-icon>
-    </a>   
-    
-    
-    <a href="https://www.instagram.com/moarray/" target="_blank" rel="noopener noreferrer" className="text-5xl cursor-pointer hover:text-dark-text dark:hover:text-teal-200 transition-colors">
-    <ion-icon name="logo-instagram"></ion-icon>
-  </a> 
-  
-  <a
-  href="https://leetcode.com/u/morray28/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-5xl cursor-pointer hover:text-dark-text dark:hover:text-teal-200 transition-colors"
->
-  <img 
-    src={leetcode} 
-    className="h-10 w-10  hover:text-dark-text dark:hover:text-teal-200 transition-all"
-    alt="LeetCode logo"
-  />
-</a>
+            <a
+              href="https://www.instagram.com/moarray/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:scale-110 transform transition duration-300 hover:text-gray-900 dark:hover:text-teal-300"
+            >
+              <FaInstagram />
+            </a>
 
-  
-   </div>
-        <div className="mt-4 text-center">
-          <p className="text-sm">&copy; {new Date().getFullYear()} Ritesh More . All rights reserved.</p>
+            <a
+              href="https://leetcode.com/u/morray28/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LeetCode"
+              className="hover:scale-110 transform transition duration-300 hover:text-gray-900 dark:hover:text-teal-300"
+            >
+              <SiLeetcode />
+            </a>
+          </div>
+        </div>
+
+        {/* Bottom copyright */}
+        <div className="mt-6 text-sm text-center  dark:text-teal-50">
+          © {new Date().getFullYear()} Ritesh More. All rights reserved.
         </div>
       </div>
     </footer>
-
-    </> )
+  );
 }

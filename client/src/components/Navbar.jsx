@@ -1,225 +1,87 @@
-import React from 'react'
-import { useState,useEffect} from 'react';
-import '/src/index.css'; 
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
+import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import '/src/index.css';
 
 export default function Navbar() {
-  
- 
-const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  // Set initial state based on system preference or local storage
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Retrieve from local storage if previously set
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : prefersDarkMode;
   });
 
-  // Update body class and local storage when isDarkMode changes
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     document.body.classList.toggle('dark', isDarkMode);
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(prevMode => !prevMode);
-  };
-
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleDarkMode = () => setIsDarkMode(prev => !prev);
+  const toggleMenu = () => setIsOpen(prev => !prev);
 
   return (
-    <>
-    {/***       <nav className="border-gray-200  rounded-xl">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <span className="text-3xl hover:tracking-widest hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer">Ritesh More</span>
+    <header className="sticky top-0 z-50 w-full bg-white/45 dark:bg-slate-900/45 backdrop-blur-md shadow-md">
+      {/* Edge-to-edge full width container */}
+      <div className="w-full">
+        <nav className="flex justify-between items-center w-full py-4 px-0">
+          {/* Logo */}
+          <span className="text-2xl font-bold pl-4 md:pl-6 cursor-pointer hover:tracking-wider hover:scale-110 transition-all duration-300 text-gray-800 dark:text-white">
+            
+             <Link to="hero" smooth duration={500} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">moarray</Link>
+           
+          </span>
 
-       
-      
-      
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex space-x-6 items-center text-sm font-medium text-gray-800 dark:text-gray-200 pr-4 md:pr-6">
+            <li><Link to="about" smooth duration={500} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">About Me</Link></li>
+            <li><Link to="skills" smooth duration={600} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">Skills</Link></li>
+            <li><Link to="projects" smooth duration={700} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">Projects</Link></li>
+            <li><Link to="contact" smooth duration={800} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">Contact</Link></li>
+            <li>
+              <button
+                onClick={toggleDarkMode}
+                className="text-xl hover:text-yellow-400 dark:hover:text-pink-300 transition"
+                aria-label="Toggle dark mode"
+              >
+                {isDarkMode ? <FaSun /> : <FaMoon />}
+              </button>
+            </li>
+          </ul>
 
-        <button
-          onClick={toggleMenu}
-          type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm   rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-default"
-          aria-expanded={isOpen}
-        >
-          <span className="sr-only">Open main menu</span>
-          <svg
-            className="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-2xl text-gray-700 dark:text-gray-200 pr-4 focus:outline-none"
           >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
-          </svg>
-        </button>
+            {isOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </nav>
 
-        <div
-          className={`${
-            isOpen ? 'block' : 'hidden'
-          } w-full md:block md:w-auto`}
-          id="navbar-default"
-        >
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
-           
-           
-            <li>
-              <Link
-                href="#"
-                className="block py-2 px-3  rounded md:bg-transparent hover:-translate-y-2 ease-in-out duration-300 hover:dark:text-teal-50  "
-                aria-current="page"
-              >
-                Skills
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="#"
-                className="block py-2 px-3  rounded md:bg-transparent hover:-translate-y-2 ease-in-out duration-300 hover:dark:text-teal-50  "
-                aria-current="page"
-              >
-                About Me
-              </Link>
-
-
-              
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="block py-2 px-3  rounded md:bg-transparent hover:-translate-y-2 ease-in-out duration-300 hover:dark:text-teal-50  "
-                aria-current="page"
-              >
-                Contact Me
-              </Link>
-            </li>
-
-
-            <li>
-            
-            
-
-      
-            <label className="inline-flex items-center cursor-pointer">
-            <input type="checkbox" className="sr-only peer"    onClick={toggleDarkMode}
-            //  console.log(isDarkMode);
-            />
-            <div className="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-10 rounded-full peer bg-slate-950  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-rose-800 after:dark:bg-pink-50 after:rounded-full after:h-5 after:w-5 after:transition-all "></div>
-            <span className="m-2 text-sm font-medium">{isDarkMode ? "Dark " : "Light " }Mode</span>
-          </label>
-     
-
-
-     
-        </li>
-            
-                      </ul>
-        </div>
+        {/* Mobile Dropdown */}
+        {isOpen && (
+          <div className="md:hidden px-4 pb-4">
+            <ul className="flex flex-col space-y-4 text-gray-800 dark:text-gray-200 font-medium">
+              <li><Link to="about" smooth duration={500} onClick={() => setIsOpen(false)} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">About Me</Link></li>
+              <li><Link to="skills" smooth duration={600} onClick={() => setIsOpen(false)} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">Skills</Link></li>
+              <li><Link to="projects" smooth duration={700} onClick={() => setIsOpen(false)} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">Projects</Link></li>
+              <li><Link to="contact" smooth duration={800} onClick={() => setIsOpen(false)} className="cursor-pointer hover:text-rose-500 dark:hover:text-rose-300 transition">Contact</Link></li>
+              <li>
+                <button
+                  onClick={() => {
+                    toggleDarkMode();
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center gap-2 text-xl hover:text-yellow-400 dark:hover:text-pink-300 transition"
+                >
+                  {isDarkMode ? <FaMoon /> : <FaSun />} {isDarkMode ? 'Dark' : 'Light'} Mode
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
-    </nav>
-     */}
-
-     <div className=" overflow-y-auto sticky">
-     <nav className="border-gray-200 rounded-xl sticky top-0 z-50  shadow-md">
-       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-         <span className="text-3xl hover:tracking-widest hover:scale-125 hover:dark:text-emerald-50 hover:text-gray-700 ease-in-out duration-200 cursor-pointer">
-           moarray
-         </span>
- 
-         <button
-           onClick={toggleMenu}
-           type="button"
-           className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-           aria-controls="navbar-default"
-           aria-expanded={isOpen}
-         >
-           <span className="sr-only">Open main menu</span>
-           <svg
-             className="w-5 h-5"
-             aria-hidden="true"
-             xmlns="http://www.w3.org/2000/svg"
-             fill="none"
-             viewBox="0 0 17 14"
-           >
-             <path
-               stroke="currentColor"
-               strokeLinecap="round"
-               strokeLinejoin="round"
-               strokeWidth="2"
-               d="M1 1h15M1 7h15M1 13h15"
-             />
-           </svg>
-         </button>
- 
-         <div
-           className={`${
-             isOpen ? 'block' : 'hidden'
-           } w-full md:block md:w-auto`}
-           id="navbar-default"
-         >
-           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
-             
-             
-           <li>
-               <Link
-               to="about" smooth={true} duration={500}
-                 className="block py-2 px-3 rounded cursor-pointer md:bg-transparent hover:-translate-y-2 ease-in-out duration-300 hover:dark:text-teal-50"
-                 aria-current="page"
-               >
-                 About Me
-               </Link>
-             </li>
-             
-             <li>
-               <Link
-                  to="skills" smooth={true} duration={600}
-                 className="block py-2 px-3 rounded cursor-pointer md:bg-transparent hover:-translate-y-2 ease-in-out duration-300 hover:dark:text-teal-50"
-                 aria-current="page"
-               >
-                 Skills
-               </Link>
-             </li>
- 
-
- 
-             <li>
-               <Link
-
-to="projects" smooth={true} duration={700}
-                 className="block py-2 px-3 rounded  cursor-pointer md:bg-transparent hover:-translate-y-2 ease-in-out duration-300 hover:dark:text-teal-50"
-                 aria-current="page"
-               >
-                 Projects
-               </Link>
-             </li>
- 
-             <li>
-               <label className="inline-flex items-center cursor-pointer">
-                 <input type="checkbox" className="sr-only peer" onClick={toggleDarkMode} />
-                 <div className="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-10 rounded-full peer bg-slate-950 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-rose-800 after:dark:bg-pink-50 after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                 <span className="m-2 text-sm font-medium">{isDarkMode ? "Dark " : "Light "}Mode</span>
-               </label>
-             </li>
-           </ul>
-         </div>
-       </div>
-     </nav>
- 
-     </div>
-     </>
-  )
+    </header>
+  );
 }
