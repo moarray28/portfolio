@@ -243,7 +243,7 @@ export default function Content() {
           </button>
           <button
             className="bg-dark-gradient mx-2 text-xl text-dark-text p-3 rounded-xl my-4 dark:bg-light-gradient dark:text-light-text w-full sm:w-auto"
-            onClick={() => console.log("Download Resume")}
+            onClick={downloadResume}
           >
             Get My Resume
           </button>
