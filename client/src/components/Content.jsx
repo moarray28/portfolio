@@ -272,21 +272,21 @@ export default function Content() {
                 <span className="w-3 h-3 rounded-full bg-green-400"></span>
               </div>
               <div className="p-6 md:p-8 text-left dark:text-dark-text text-light-text text-base md:text-lg leading-relaxed h-full">
-                <p>
-                  Hi, I'm{" "}
-                  <span className="font-semibold">Ritesh Ravindra More</span>, a
-                  Frontend Developer with a passion for clean, scalable UI. I
-                  love turning complex problems into simple, beautiful, and
-                  intuitive designs using technologies like React, Tailwind CSS,
-                  and modern JS.
-                </p>
-                <p className="mt-4">
-                  My journey is driven by curiosity, consistency, and a desire
-                  to build experiences that delight users. Whether it's creating
-                  animations or debugging layout bugs, I love every pixel of
-                  frontend engineering.
-                </p>
-              </div>
+  <p>
+    Hi, I'm <span className="font-semibold">Ritesh Ravindra More</span> from Mumbai, India. A developer passionate about building clean, responsive UIs using <span className="font-medium">React</span>, <span className="font-medium">Tailwind CSS</span>, and modern <span className="font-medium">JavaScript</span>.
+  </p>
+
+  <p className="mt-4">
+    I enjoy turning ideas into smooth digital experiences, with a growing interest in <span className="font-medium">MERN</span>, <span className="font-medium">Java</span> and <span className="font-medium">AI</span>. Off-screen, I love playing chess and listening to music that fuels my creativity.
+  </p>
+
+  <p className="mt-4">
+    I believe in learning by doing and constantly pushing my limits through real-world projects.
+  </p>
+</div>
+
+
+
             </div>
 
 <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-[#090e15] text-slate-100 text-left">
