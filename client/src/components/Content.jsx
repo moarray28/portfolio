@@ -211,33 +211,36 @@ export default function Content() {
     <section id="hero" className=""> 
       <div className="flex flex-col-reverse md:flex-row items-center my-5 justify-center gap-8 px-4 py-12 md:px-12">
         {/* Text Section */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
-          <h2 className="text-2xl md:text-4xl font-semibold text-light-text dark:text-dark-text mb-4">
-            Hey, I'm Ritesh More.
-          </h2>
-          <p className="text-lg md:text-xl text-light-text dark:text-dark-text opacity-90 leading-relaxed">
-            A passionate Developer specializing in creating 
-            intuitive and visually stunning user experiences.
-          </p>
+        <div className="w-full md:w-1/2 text-center md:text-left animate-fade-in-up">
+  <h2 className="text-2xl md:text-4xl font-semibold text-light-text dark:text-dark-text mb-4 transition-all duration-300 ease-in-out">
+    <span className="inline-block hover:tracking-wide transition-all duration-300">
+      Hey, I'm Ritesh More.
+    </span>
+  </h2>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
-            <Link
-              to="contact"
-              smooth={true}
-              duration={600}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-dark-gradient text-dark-text dark:bg-light-gradient dark:text-light-text font-medium hover:scale-105 transition-transform shadow-md"
-            >
-              Get in touch
-            </Link>
+  <p className="text-lg md:text-xl text-light-text dark:text-dark-text opacity-90 leading-relaxed transition-opacity duration-300">
+    A passionate Developer specializing in creating intuitive and visually stunning user experiences.
+  </p>
 
-            <button
-              onClick={downloadResume}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-dark-gradient text-dark-text dark:bg-light-gradient dark:text-light-text font-medium hover:scale-105 transition-transform shadow-md"
-            >
-              Get My Resume
-            </button>
-          </div>
-        </div>
+  <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+    <Link
+      to="contact"
+      smooth={true}
+      duration={600}
+      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-dark-gradient cursor-pointer text-dark-text dark:bg-light-gradient dark:text-light-text font-medium transform transition-transform duration-300 hover:scale-105 shadow-md"
+    >
+      Get in touch
+    </Link>
+
+    <button
+      onClick={downloadResume}
+      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-dark-gradient text-dark-text dark:bg-light-gradient dark:text-light-text font-medium transform transition-transform duration-300 hover:scale-105 shadow-md"
+    >
+      Get My Resume
+    </button>
+  </div>
+</div>
+
 
         {/* Profile Image (unchanged animation logic) */}
         <div
