@@ -12,10 +12,10 @@ import express from "../assets/express.svg";
 import mongodb from "../assets/mongodb.svg";
 import redux from "../assets/redux.svg";
 import json from "../assets/json.svg";
-import weatherapp from "../assets/weatherapp.png";
+import mealmate from "../assets/mealmate.png";
 import notesapp from "../assets/notesapp.png";
 import Skills from "./Skills";
-import elearn from "../assets/elearn.png";
+import toolnode from "../assets/toolnode.png";
 import snlgame from "../assets/snlgame.png";
 import { Link } from "react-scroll";
 import contactlight from "../assets/contactlight.gif";
@@ -40,13 +40,22 @@ const skills = [
 
 const projects = [
   {
-    id: 3,
-    image: elearn,
-    title: "Elearning Platform",
+    id: 6,
+    image: mealmate,
+    title: "E-Canteen Application",
     description:
-      "Elearning platform for students and teachers for learning together.",
-    liveLink: "https://elearn-omega-three.vercel.app/",
-    codeLink: "https://github.com/moarray28/elearn",
+      "Smart, queue-free food ordering with live menus, pre-ordering, and digital payments.",
+    liveLink: "https://ecanteen-system.vercel.app/",
+    codeLink: "https://github.com/Prajapati-Shivam/ecanteen-system",
+  },
+  {
+    id: 3,
+    image: toolnode,
+    title: "Tool Renting Platform",
+    description:
+      "Renting platform where user can be both borrower or lender ",
+    liveLink: "https://tool-node.vercel.app/",
+    codeLink: "https://github.com/moarray28/ToolNode",
   },
   {
     id: 2,
@@ -84,15 +93,7 @@ const projects = [
     liveLink: "https://epicplay-moarray28s-projects.vercel.app/",
     codeLink: "https://github.com/moarray28/gamelisting",
   },
-  {
-    id: 6,
-    image: weatherapp,
-    title: "Weather App",
-    description:
-      "Photon is a web-based platform for having current and future weather reports.",
-    liveLink: "https://github.com/moarray28/weatherapp/",
-    codeLink: "https://github.com/moarray28/weatherapp/",
-  },
+  
 ];
 
 export default function Content() {
