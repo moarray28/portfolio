@@ -1,75 +1,434 @@
+// ===============================
+// server.js
+// ===============================
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
-const path = require('path'); 
-require('dotenv').config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const nodemailer = require("nodemailer");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const path = require("path");
+const bcrypt = require("bcryptjs");
 
-const cors = require('cors');
+require("dotenv").config();
 
 const app = express();
-const port = 3000; // Use the port from environment variables if available
 
 app.use(cors({
-  origin: process.env.VITE_FRONTEND_URL || '*', // Fallback to '*' if not defined
- 
+  origin:
+    process.env.FRONTEND_URL || "*",
   credentials: true
 }));
 
 app.use(bodyParser.json());
 
-// Endpoint to handle form submissions
-app.post('/api/contact', async (req, res) => {
-  const { name, email, message } = req.body;
+mongoose.connect(
+  process.env.MONGO_URL
+)
+.then(() => {
+  console.log(
+    "MongoDB Connected"
+  );
+})
+.catch((err) => {
+  console.log(err);
+});
 
-  // Set up Nodemailer transport
-  const transporter = nodemailer.createTransport({
-    service: 'gmail', // or any other email service
-    auth: {
-      user: process.env.VITE_EMAIL,
-      pass: process.env.VITE_EMAIL_PASSWORD // Google App password
+const visitorSchema =
+  new mongoose.Schema({
+
+    visitorId: String,
+
+    ip: String,
+
+    browser: String,
+
+    os: String,
+
+    deviceType: String,
+
+    language: String,
+
+    platform: String,
+
+    screen: String,
+
+    timezone: String,
+
+    referrer: String,
+
+    source: String,
+
+    isReturning: Boolean,
+
+    totalVisits: {
+      type: Number,
+      default: 1
+    },
+
+    routeHistory: [String],
+
+    scrollPercentage: Number,
+
+    mouseMovements: Number,
+
+    clicks: Number,
+
+    sessionDuration: Number,
+
+    lastActiveTime: Date,
+
+    active: {
+      type: Boolean,
+      default: true
+    },
+
+    createdAt: {
+      type: Date,
+      default: Date.now
     }
+
   });
 
-  // Set up email data
-  const mailOptions = {
-    from: email,
-    to: process.env.VITE_EMAIL,
-    subject: `Contact form submission from ${name}`,
-    text: message,
-    html: `<p>From: ${name} (${email})</p><p>${message}</p>`
-  };
+const Visitor =
+  mongoose.model(
+    "Visitor",
+    visitorSchema
+  );
 
-  try {
-    // Send email
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'Message sent successfully' });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ message: 'Failed to send message' });
+const adminSchema =
+  new mongoose.Schema({
+
+    username: String,
+
+    password: String
+
+  });
+
+const Admin =
+  mongoose.model(
+    "Admin",
+    adminSchema
+  );
+
+// =========================
+// ADMIN LOGIN
+// =========================
+
+app.post(
+  "/api/admin-login",
+  async (req, res) => {
+
+    try {
+
+      const {
+        username,
+        password
+      } = req.body;
+
+      const admin =
+        await Admin.findOne({
+          username
+        });
+
+      if (!admin) {
+
+        return res.status(404)
+          .json({
+            success: false
+          });
+      }
+
+      const isMatch =
+        await bcrypt.compare(
+          password,
+          admin.password
+        );
+
+      if (!isMatch) {
+
+        return res.status(401)
+          .json({
+            success: false
+          });
+      }
+
+      res.status(200).json({
+        success: true
+      });
+
+    } catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+        success: false
+      });
+    }
   }
-});
+);
 
+// =========================
+// TRACK VISITOR
+// =========================
 
-const resumeFilePath = path.join(__dirname, 'resume.pdf');  // Use path.join for accurate file path
+app.post(
+  "/api/track",
+  async (req, res) => {
 
-// Endpoint to download the resume
-app.get('/download/resume', (req, res) => {
-  res.download(resumeFilePath, 'YourResume.pdf', (err) => {
-    if (err) {
-      console.error(err);  // Log the error to see what went wrong
-      res.status(500).send('File not found or error in downloading');
+    try {
+
+      // IGNORE YOURSELF
+
+      if (
+        req.body.visitorId ===
+        process.env.ADMIN_VISITOR_ID
+      ) {
+
+        return res.status(200)
+          .json({
+            message:
+              "Admin ignored"
+          });
+      }
+
+      const ip =
+        req.headers[
+          "x-forwarded-for"
+        ] ||
+        req.socket.remoteAddress;
+
+      const data =
+        req.body;
+
+      let existingVisitor =
+        await Visitor.findOne({
+
+          visitorId:
+            data.visitorId
+
+        });
+
+      if (
+        existingVisitor
+      ) {
+
+        existingVisitor.totalVisits += 1;
+
+        existingVisitor.isReturning =
+          true;
+
+        existingVisitor.lastActiveTime =
+          data.lastActiveTime;
+
+        existingVisitor.routeHistory =
+          data.routeHistory;
+
+        existingVisitor.scrollPercentage =
+          data.scrollPercentage;
+
+        existingVisitor.mouseMovements =
+          data.mouseMovements;
+
+        existingVisitor.clicks =
+          data.clicks;
+
+        existingVisitor.sessionDuration =
+          data.sessionDuration;
+
+        await existingVisitor.save();
+
+        return res.json({
+          message:
+            "Returning visitor updated"
+        });
+      }
+
+      const visitor =
+        new Visitor({
+
+          ...data,
+
+          ip,
+
+          isReturning:
+            false
+
+        });
+
+      await visitor.save();
+
+      res.status(201).json({
+        message:
+          "Visitor tracked"
+      });
+
+    } catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+        message:
+          "Server Error"
+      });
     }
+  }
+);
+
+// =========================
+// ANALYTICS
+// =========================
+
+app.get(
+  "/api/analytics",
+  async (req, res) => {
+
+    try {
+
+      const visitors =
+        await Visitor.find()
+          .sort({
+            createdAt: -1
+          });
+
+      res.json({
+
+        totalVisitors:
+          visitors.length,
+
+        uniqueVisitors:
+          new Set(
+            visitors.map(
+              (v) =>
+                v.visitorId
+            )
+          ).size,
+
+        activeUsers:
+          visitors.filter(
+            (v) =>
+              v.active
+          ).length,
+
+        returningVisitors:
+          visitors.filter(
+            (v) =>
+              v.isReturning
+          ).length,
+
+        visitors
+
+      });
+
+    } catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+        message:
+          "Server Error"
+      });
+    }
+  }
+);
+
+// =========================
+// CONTACT
+// =========================
+
+app.post(
+  "/api/contact",
+  async (req, res) => {
+
+    try {
+
+      const {
+        name,
+        email,
+        message
+      } = req.body;
+
+      const transporter =
+        nodemailer.createTransport({
+
+          service: "gmail",
+
+          auth: {
+
+            user:
+              process.env.EMAIL,
+
+            pass:
+              process.env.EMAIL_PASSWORD
+          }
+        });
+
+      await transporter.sendMail({
+
+        from: email,
+
+        to:
+          process.env.EMAIL,
+
+        subject:
+          `Portfolio Contact from ${name}`,
+
+        text: message
+
+      });
+
+      res.status(200).json({
+        message:
+          "Message sent"
+      });
+
+    } catch (err) {
+
+      console.log(err);
+
+      res.status(500).json({
+        message:
+          "Error"
+      });
+    }
+  }
+);
+
+// =========================
+// RESUME
+// =========================
+
+const resumeFilePath =
+  path.join(
+    __dirname,
+    "resume.pdf"
+  );
+
+app.get(
+  "/download/resume",
+  (req, res) => {
+
+    res.download(
+      resumeFilePath,
+      "YourResume.pdf"
+    );
+  }
+);
+
+app.get("/", (req, res) => {
+
+  res.json({
+    message:
+      "Portfolio Backend Running 🚀"
   });
 });
 
+const PORT =
+  process.env.PORT || 3000;
 
+app.listen(PORT, () => {
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Server for portfolio is running perfectly!  😊👍' });
-});
-
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(
+    `Server running on ${PORT}`
+  );
 });
