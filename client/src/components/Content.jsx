@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import profile from "../assets/profile.png";
 import reactjs from "../assets/react.svg";
 import nodejs from "../assets/nodejs.svg";
@@ -20,7 +20,6 @@ import snlgame from "../assets/snlgame.png";
 import { Link } from "react-scroll";
 import contactlight from "../assets/contactlight.gif";
 import gameapp from "../assets/gameapp.png";
-import Navbar from "./Navbar";
 import newswave from "../assets/newswave.png";
 import { motion } from "framer-motion";
 const skills = [
@@ -96,78 +95,94 @@ const projects = [
   
 ];
 
+const journey = [
+  {
+    id: "education",
+    period: "Academic foundation",
+    type: "Education",
+    title: "Master of Computer Applications",
+    organization: "Mumbai Educational Trust's Institute of Computer Science",
+    description:
+      "Built a foundation in computer applications and software development, and grew an interest in solving practical problems with technology.",
+    tags: ["Software development", "AI/ML"],
+  },
+  {
+    id: "revvity",
+    period: "Jan 2026 — Sep 2026",
+    type: "Industry experience",
+    title: "Software Engineer Intern",
+    organization: "Revvity",
+    description:
+      "Contributed to AI integrations across Salesforce, Jira, and Confluence, and worked on AI agents for software workflows.",
+    tags: ["AI integration","AI Agents","Salesforce", "Jira", "Confluence"],
+  },
+  {
+    id: "direction",
+    period: "The direction I’m building toward",
+    type: "Next chapter",
+    title: "AI-powered software that solves real problems",
+    organization: "Software × AI",
+    description:
+      "Bringing product-minded software engineering and practical AI together to create applications that are genuinely useful.",
+    tags: ["Applied AI", "Full-stack products", "Problem solving"],
+  },
+];
+
 export default function Content() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [statusType, setStatusType] = useState("success"); // "success
-
+  const [resumeStatus, setResumeStatus] = useState("");
+  const [statusType, setStatusType] = useState("success");
   const [status, setStatus] = useState("");
 
   const backendurl = import.meta.env.VITE_BACKEND_URL;
-   const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setStatus("");
 
-  // Basic validation
-  if (!name.trim() || !email.trim() || !message.trim()) {
-    setStatus("❌ Please fill in all fields.");
-    setStatusType("error");
-    return;
-  }
+    try {
+      if (!backendurl) {
+        throw new Error("Contact service is not configured.");
+      }
 
-  setLoading(true);
-  try {
-    const response = await fetch(`${backendurl}/api/contact`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, message }),
-    });
+      const response = await fetch(`${backendurl}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
 
-    setLoading(false);
-    if (response.ok) {
-      setStatus("✅ Message sent successfully!");
+      if (!response.ok) {
+        throw new Error("The contact request could not be sent.");
+      }
+
+      setStatus("Thanks for reaching out. Your message is on its way.");
       setStatusType("success");
       setName("");
       setEmail("");
       setMessage("");
-    } else {
-      throw new Error("Server error");
+    } catch (error) {
+      console.error("Error sending contact message:", error);
+      setStatus("Your message could not be sent. Please try again.");
+      setStatusType("error");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    setLoading(false);
-    setStatus("❌ Failed to send message. Please try again.");
-    setStatusType("error");
-  }
+  };
 
-  // Hide status after 2.5 seconds
-  setTimeout(() => {
-    setStatus("");
-  }, 2500);
-};
-
-  const downloadResume = async () => {
+  const downloadResume = () => {
+    setResumeStatus("");
     try {
-      const response = await fetch(`${backendurl}/download/resume`);
-
-      // Ensure the response is valid (status 200)
-      if (!response.ok) {
-        throw new Error("Failed to fetch the resume");
+      if (!backendurl) {
+        throw new Error("Resume service is not configured.");
       }
 
-      const blob = await response.blob(); // Convert the response to a Blob
-
-      const link = document.createElement("a"); // Create an <a> element to trigger download
-      const url = window.URL.createObjectURL(blob); // Create a URL for the Blob
-      link.href = url;
-      link.setAttribute("download", "RiteshsResume.pdf"); // Set the filename
-      document.body.appendChild(link);
-      link.click(); // Trigger the click to download the file
-      document.body.removeChild(link); // Clean up the DOM by removing the link
+      window.location.assign(`${backendurl}/download/resume`);
     } catch (error) {
-      console.error("Error downloading the file:", error); // Log any errors
+      console.error("Error opening the resume download:", error);
+      setResumeStatus("Résumé download is unavailable right now.");
     }
   };
 
@@ -199,93 +214,96 @@ export default function Content() {
     });
   };
 
-  useEffect(() => {
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   return (
     <>
   
-    <section id="hero" className=""> 
-      <div className="flex flex-col-reverse md:flex-row items-center my-5 justify-center gap-8 px-4 py-12 md:px-12">
+    <section id="hero" className="hero section-wrap">
+      <div className="hero-layout">
         {/* Text Section */}
-        <div className="w-full md:w-1/2 text-center md:text-left animate-fade-in-up">
-  <h2 className="text-2xl md:text-4xl font-semibold text-light-text dark:text-dark-text mb-4 transition-all duration-300 ease-in-out">
-    <span className="inline-block hover:tracking-wide transition-all duration-300">
-      Hey, I'm Ritesh More.
-    </span>
-  </h2>
+        <div className="hero-copy">
+  <p className="eyebrow"><span className="status-dot" /> Software engineering · AI applications</p>
+  <h1>
+    Hey, I’m Ritesh More.
+    <br />
+    <span>I build software</span>
+    <br />
+    that puts AI to work.
+  </h1>
 
-  <p className="text-lg md:text-xl text-light-text dark:text-dark-text opacity-90 leading-relaxed transition-opacity duration-300">
-    A passionate Developer specializing in creating intuitive and visually stunning user experiences.
+  <p className="hero-intro">
+    I’m a Software Engineer exploring how AI and well-crafted applications can come together to solve real problems.
   </p>
 
-  <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+  <div className="hero-actions">
     <Link
       to="contact"
       smooth={true}
       duration={600}
-      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-dark-gradient cursor-pointer text-dark-text dark:bg-light-gradient dark:text-light-text font-medium transform transition-transform duration-300 hover:scale-105 shadow-md"
+      offset={-76}
+      className="button button-primary"
     >
-      Get in touch
+      Let’s talk <span aria-hidden="true">↗</span>
     </Link>
 
     <button
       onClick={downloadResume}
-      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-dark-gradient text-dark-text dark:bg-light-gradient dark:text-light-text font-medium transform transition-transform duration-300 hover:scale-105 shadow-md"
+      type="button"
+      className="button button-secondary"
     >
-      Get My Resume
+      Get My Resume <span aria-hidden="true">↓</span>
     </button>
   </div>
+  {resumeStatus && <p className="resume-status" role="status">{resumeStatus}</p>}
+  
 </div>
 
 
         {/* Profile Image (unchanged animation logic) */}
-        <div
-          className="w-full md:w-1/2 flex justify-center items-center"
-          onMouseMove={handleMouseMove}
-        >
+        <div className="hero-visual" onMouseMove={handleMouseMove}>
+          <div className="visual-grid" />
+          <div className="visual-orbit orbit-one" />
+          <div className="visual-orbit orbit-two" />
           <img
             src={profile}
-            alt="Profile"
-            className="w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full object-cover shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out cursor-pointer"
+            alt="Ritesh More"
+            className="profile-image"
             style={transformStyle}
           />
+          <div className="visual-chip chip-top"><span className="chip-mark">AI</span> Applied intelligence</div>
+          <div className="visual-chip chip-bottom"><span className="chip-mark">{"</>"}</span> Full-stack thinking</div>
+          <div className="visual-index">MUMBAI, INDIA <span>·</span> BUILDING WITH PURPOSE</div>
         </div>
       </div>
       </section>
 
-      <section id="about" className="w-full py-16 px-4 md:px-12">
-        <div className="max-w-6xl mx-auto">
+      <section id="about" className="about-section section-wrap section-space">
+        <div>
           {/* Section Title */}
-          <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-center text-light-text dark:text-dark-text hover:tracking-widest transition-all duration-300">
-            About Me
+          <p className="eyebrow">About me</p>
+          <h2 className="section-title">
+            Where software<br />meets intelligence.
           </h2>
 
           {/* Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="about-grid">
             {/* Left Panel - Description with Editor Style */}
-            <div className="relative rounded-xl overflow-hidden  border-2 dark:border-[#4c0519] transition-all duration-900 bg-gradient-to-br  from-[#f2e4ec] via-[#dbc3cc] to-[#c3a3af]  dark:to-[#4c0519] dark:from-[#c01048]">
+            <div className="about-story">
               {/* Fake window bar */}
-              <div className="flex items-center justify-start space-x-2 px-4 py-2 dark:bg-[#e0d3d8] bg-[#2d0e16]">
-                <span className="w-3 h-3 rounded-full bg-red-400"></span>
-                <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-                <span className="w-3 h-3 rounded-full bg-green-400"></span>
+              <div className="window-bar">
+                <span></span><span></span><span></span>
+                <span className="window-label">A bit about me</span>
               </div>
-              <div className="p-6 md:p-8 text-left dark:text-dark-text text-light-text text-base md:text-lg leading-relaxed h-full">
+              <div className="about-story-copy">
   <p>
-    Hi, I'm <span className="font-semibold">Ritesh Ravindra More</span> from Mumbai, India. A developer passionate about building clean, responsive UIs using <span className="font-medium">React</span>, <span className="font-medium">Tailwind CSS</span>, and modern <span className="font-medium">JavaScript</span>.
+    Hi, I’m <span className="font-semibold">Ritesh Ravindra More</span> from Mumbai, India. I enjoy building useful software and exploring how <span className="font-medium">AI</span> can make digital products more capable and intuitive.
   </p>
 
   <p className="mt-4">
-    I enjoy turning ideas into smooth digital experiences, with a growing interest in <span className="font-medium">MERN</span>, <span className="font-medium">Java</span> and <span className="font-medium">AI</span>. Off-screen, I love playing chess and listening to music that fuels my creativity.
+    My focus is growing across both sides of the problem: thoughtful application development with <span className="font-medium">React</span>, <span className="font-medium">JavaScript</span>, and the <span className="font-medium">MERN</span> stack, alongside a deeper interest in practical AI engineering.
   </p>
 
   <p className="mt-4">
-    I believe in learning by doing and constantly pushing my limits through real-world projects.
+    I believe the best solutions are not just clever technology: they are reliable, approachable tools that help someone do something better.
   </p>
 </div>
 
@@ -293,20 +311,20 @@ export default function Content() {
 
             </div>
 
-<div className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-[#090e15] text-slate-100 text-left">
+<div className="profile-code">
   {/* Fake tab bar */}
-  <div className="flex items-center justify-between px-4 py-2 bg-[#2a2d3a] text-sm text-slate-300 font-medium">
+  <div className="code-tab">
     <div className="flex items-center gap-3">
-      <span className="bg-[#595a5e] px-3 py-1 rounded-md text-yellow-400">
+      <span className="code-file">
         profile.js
       </span>
       
       </div>
-    <span className="text-xs">JavaScript</span>
+    <span className="code-language">JavaScript</span>
   </div>
 
   {/* Code block */}
-  <div className="px-6 py-6 font-mono text-sm md:text-base overflow-auto leading-loose whitespace-pre text-left">
+  <div className="code-content">
   {/* Profile Object */}
   <code className="block text-yellow-300">
     let <span className="text-orange-400">profile</span> ={" "}
@@ -314,19 +332,19 @@ export default function Content() {
   </code>
   <code className="block">
     &nbsp;&nbsp;<span className="text-green-400">name</span>:{" "}
-    <span className="text-cyan-300">"Ritesh Ravindra More"</span>,
+    <span className="text-cyan-300">&quot;Ritesh Ravindra More&quot;</span>,
   </code>
   <code className="block">
     &nbsp;&nbsp;<span className="text-green-400">job</span>:{" "}
-    <span className="text-cyan-300">"Developer"</span>,
+    <span className="text-cyan-300">&quot;Developer&quot;</span>,
   </code>
   <code className="block">
     &nbsp;&nbsp;<span className="text-green-400">education</span>:{" "}
-    <span className="text-cyan-300">"MCA"</span>,
+    <span className="text-cyan-300">&quot;MCA&quot;</span>,
   </code>
   <code className="block">
     &nbsp;&nbsp;<span className="text-green-400">location</span>:{" "}
-    <span className="text-cyan-300">"Mumbai"</span>
+    <span className="text-cyan-300">&quot;Mumbai&quot;</span>
   </code>
   <code className="block text-yellow-300">&#125;</code>
 
@@ -345,7 +363,7 @@ export default function Content() {
   </code>
   <code className="block pl-4 text-green-400">
     <span className="text-blue-400">return</span>{" "}
-    <span className="text-amber-300">"✨ Mission accomplished!"</span>;
+    <span className="text-amber-300">&quot;✨ Mission accomplished!&quot;</span>;
   </code>
   <code className="block text-green-400">{"}"}</code>
 </div>
@@ -356,62 +374,116 @@ export default function Content() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="pt-10 md:pt-20">
-  <div className="m-5 mt-10">
-      <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-center text-light-text dark:text-dark-text hover:tracking-widest transition-all duration-300">
-            Skills
-          </h2>
+      <section id="journey" className="journey-section section-wrap section-space">
+        <div className="section-heading section-heading-row">
+          <div>
+            <p className="eyebrow">The path so far</p>
+            <h2 className="section-title">A few important<br />checkpoints.</h2>
+          </div>
+          <p className="section-aside">
+            From a foundation in software to putting AI to work in real product workflows.
+          </p>
+        </div>
+        <div className="journey-list">
+          {journey.map((item, index) => (
+            <article className="journey-item" key={item.id}>
+              <div className="journey-rail" aria-hidden="true">
+                <span className={`journey-marker${index === 1 ? " journey-marker-featured" : ""}`}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {index < journey.length - 1 && <span className="journey-connector" />}
+              </div>
+              <div className="journey-card">
+                <div className="journey-meta">
+                  <span>{item.type}</span>
+                  <time>{item.period}</time>
+                </div>
+                <h3>{item.title}</h3>
+                <p className="journey-organization">{item.organization}</p>
+                <p className="journey-description">{item.description}</p>
+                <div className="journey-tags">
+                  {item.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-    <div className="p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl">
+      {/* Skills Section */}
+      <section id="skills" className="skills-section section-space">
+  <div className="section-wrap">
+      <div className="section-heading section-heading-row">
+        <div>
+          <p className="eyebrow">Tools I work with</p>
+          <h2 className="section-title">Built across the stack.</h2>
+        </div>
+        <p className="section-aside">A practical foundation in software development, with a growing focus on AI-powered applications.</p>
+      </div>
+
+    <div className="skills-panel">
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6"
-        initial={{ opacity: 0, scale: 0.7 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        className="skills-grid"
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        transition={{ duration: 1, ease: 'easeOut' }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.055 } },
+        }}
       >
-        {skills.map((skill, index) => (
+        {skills.map((skill) => (
           <motion.div
-            key={index}
-            className="animate-bubble-pop"
-            whileInView={{ scale: [0, 1.2, 1] }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            key={skill.imgtitle}
+            variants={{
+              hidden: { opacity: 0, y: 18, scale: 0.94 },
+              visible: { opacity: 1, y: 0, scale: 1 },
+            }}
+            whileHover={{ y: -5, rotate: 1.5, scale: 1.025 }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
           >
             <Skills img={skill.img} imgtitle={skill.imgtitle} />
           </motion.div>
         ))}
       </motion.div>
     </div>
+    <div className="learning-strip"><span className="learning-icon" aria-hidden="true">✳</span><p><strong>Currently exploring</strong> AI engineering, intelligent applications, and the software that brings them to people.</p></div>
   </div>
 </section>
 
 
 
-      <section id="projects">
-        <div className="m-5 mt-10 p-4 md:p-6 h-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-center text-light-text dark:text-dark-text hover:tracking-widest transition-all duration-300">
-            Projects
-          </h2>
- <div className="p-4 md:p-6 lg:p-12 text-base md:text-xl text-left text-dark-text dark:text-light-text rounded-xl">
-            <div className="p-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section id="projects" className="projects-section section-wrap section-space">
+        <div className="section-heading section-heading-row">
+          <div>
+            <p className="eyebrow">Selected work</p>
+            <h2 className="section-title">Ideas made tangible.</h2>
+          </div>
+          <a className="text-link" href="https://github.com/moarray28" target="_blank" rel="noopener noreferrer">More on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+ <div className="projects-grid">
                 {projects.map((project) => (
-                  <div key={project.id} className="flex justify-center">
-                    <div className="max-w-xl min-w-60 bg-white border-2 border-gray-200 rounded-lg shadow:black shadow-lg dark:bg-slate-950 dark:border-gray-800">
-                      <div className="relative overflow-hidden rounded-t-lg h-48">
+                    <article key={project.id} className="project-card">
+                      <a
+                        className="project-image"
+                        href={project.liveLink || project.codeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open ${project.title}`}
+                      >
                         <img
-                          className="absolute cursor-pointer inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-125"
+                          className="project-preview"
                           src={project.image}
                           alt={project.title}
+                          loading="lazy"
                         />
-                      </div>
-                      <div className="p-5">
-                        <h5 className="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">
+                        <span className="project-arrow" aria-hidden="true">↗</span>
+                      </a>
+                      <div className="project-content">
+                        <h3>
                           {project.title}
-                        </h5>
-                        <p className="mb-3 font-normal text-slate-900 dark:text-stone-300">
+                        </h3>
+                        <p className="project-description">
                           {project.description}
                         </p>
                         {project.liveLink && (
@@ -419,60 +491,57 @@ export default function Content() {
                             href={project.liveLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex pulsate-bck text-white items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800"
+                            className="project-link"
                           >
-                            See Live
+                            See Live <span aria-hidden="true">↗</span>
                           </a>
                         )}
                         <a
                           href={project.codeLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex text-white mx-2 items-center px-3 py-2 text-sm font-medium text-center bg-dark-gradient dark:text-black dark:bg-light-gradient rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-white-700 dark:focus:ring-pink-800"
+                          className="project-link"
                         >
-                          See Code
+                          See Code <span aria-hidden="true">↗</span>
                         </a>
                       </div>
-                    </div>
-                  </div>
+                    </article>
                 ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-<section id="contact" className="py-16 px-4 md:px-12 scroll-mt-16">
+<section id="contact" className="contact-section section-wrap section-space scroll-mt-16">
   {/* Title */}
-   <h2 className="text-3xl md:text-4xl font-semibold mb-12 text-center text-light-text dark:text-dark-text hover:tracking-widest transition-all duration-300">
-            Contact Me
-          </h2>
+   <div className="contact-panel">
 
 
   {/* Card */}
-  <div className="mx-auto max-w-6xl rounded-2xl dark:bg-light-gradient bg-dark-gradient shadow-xl backdrop-blur-sm">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="contact-grid">
       {/* Illustration */}
-      <div className="flex items-center justify-center p-6">
-        <img
-          src={contactlight}
-          alt="Contact illustration"
-          className="w-3/4 md:w-full max-w-xs rounded-full shadow-lg"
-          loading="lazy"
-        />
+      <div className="contact-copy">
+        <p className="eyebrow">Have a good problem?</p>
+        <h2 className="section-title">Let’s make<br />something useful.</h2>
+        <p>Have an idea where software and AI can work better together? I’d be glad to hear about it.</p>
+        <div className="contact-art-card">
+          <img
+            src={contactlight}
+            alt="Illustration of a person at a desk receiving a message"
+            className="contact-art"
+            loading="lazy"
+          />
+        </div>
       </div>
 
       {/* Form */}
-      <div className="p-6 md:p-10">
+      <div className="contact-form-wrap">
         <form
-          className="flex flex-col space-y-4 text-left"
+          className="contact-form"
           onSubmit={handleSubmit}
-          noValidate
         >
           {/* Name */}
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-dark-text dark:text-light-text"
+            className="form-label"
           >
             Your Name
           </label>
@@ -481,16 +550,19 @@ export default function Content() {
             name="name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setStatus("");
+            }}
             placeholder="John Doe"
             required
-            className="mt-1 px-4 py-2 w-full rounded-lg border border-gray-300 bg-white  text-gray-900  focus:ring-2 focus:ring-rose-400 focus:outline-none"
+            className="form-input"
           />
 
           {/* Email */}
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-dark-text dark:text-light-text"
+            className="form-label"
           >
             Email
           </label>
@@ -499,16 +571,19 @@ export default function Content() {
             name="email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setStatus("");
+            }}
             placeholder="john@example.com"
             required
-            className="mt-1 px-4 py-2 w-full rounded-lg border border-gray-300 bg-white  text-gray-900   focus:ring-2 focus:ring-rose-400 focus:outline-none"
+            className="form-input"
           />
 
           {/* Message */}
           <label
             htmlFor="message"
-            className="block text-sm font-medium text-dark-text dark:text-light-text"
+            className="form-label"
           >
             Message
           </label>
@@ -517,17 +592,20 @@ export default function Content() {
             name="message"
             rows="4"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => {
+              setMessage(e.target.value);
+              setStatus("");
+            }}
             placeholder="How can I help you?"
             required
-            className="mt-1 px-4 py-2 w-full rounded-lg border border-gray-300 bg-white  text-gray-900  resize-none focus:ring-2 focus:ring-rose-400 focus:outline-none"
+            className="form-input form-textarea"
           />
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-light-gradient dark:bg-dark-gradient px-6 py-3 text-slate-950 dark:text-white font-semibold tracking-wide shadow-md transition-transform hover:-translate-y-0.5 active:translate-y-0 focus:ring-2 focus:ring-rose-500 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="button button-primary send-button"
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
@@ -535,18 +613,19 @@ export default function Content() {
           {/* Status Message */}
           {!!status && (
             <div
-              className={`mt-2 text-center text-sm font-medium rounded-lg px-4 py-2 ${
+              className={`form-status ${
                 statusType === "success"
-                  ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-200/20 dark:text-emerald-300"
-                  : "bg-red-100 text-red-700 dark:bg-red-400/20 dark:text-red-300"
+                  ? "success"
+                  : "error"
               }`}
+              role="status"
             >
               {status}
             </div>
           )}
         </form>
       </div>
-    </div>
+  </div>
   </div>
 </section>
 

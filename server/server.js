@@ -14,10 +14,38 @@ require("dotenv").config();
 
 const app = express();
 
+const configuredFrontendOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.VITE_FRONTEND_URL
+]
+  .filter(Boolean)
+  .flatMap((value) => value.split(","))
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowedFrontendOrigins = new Set([
+  ...configuredFrontendOrigins.map((origin) => new URL(origin).origin),
+  ...(process.env.NODE_ENV !== "production"
+    ? [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
+      ]
+    : []),
+]);
+
 app.use(cors({
-  origin:
-    process.env.FRONTEND_URL || "*",
-  credentials: true
+  origin(origin, callback) {
+    if (!origin || allowedFrontendOrigins.has(new URL(origin).origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Origin is not allowed by CORS"));
+  },
+  methods: ["GET", "POST", "PUT", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false,
 }));
 
 app.use(bodyParser.json());
@@ -111,6 +139,34 @@ const Admin =
     adminSchema
   );
 
+const portfolioSettingSchema = new mongoose.Schema({
+  key: { type: String, required: true, unique: true },
+  value: { type: String, required: true },
+});
+
+const PortfolioSetting = mongoose.model(
+  "PortfolioSetting",
+  portfolioSettingSchema
+);
+
+function getGoogleDriveFileId(value) {
+  let url;
+
+  try {
+    url = new URL(value);
+  } catch {
+    return null;
+  }
+
+  if (!["drive.google.com", "docs.google.com"].includes(url.hostname)) {
+    return null;
+  }
+
+  const pathMatch = url.pathname.match(/\/(?:file\/)?d\/([a-zA-Z0-9_-]+)/);
+  const fileId = pathMatch?.[1] || url.searchParams.get("id");
+  return fileId && /^[a-zA-Z0-9_-]+$/.test(fileId) ? fileId : null;
+}
+
 // =========================
 // ADMIN LOGIN
 // =========================
@@ -167,6 +223,45 @@ app.post(
     }
   }
 );
+
+app.get("/api/resume-link", async (req, res) => {
+  try {
+    const setting = await PortfolioSetting.findOne({ key: "resumeUrl" }).lean();
+    res.json({ url: setting?.value || null });
+  } catch (err) {
+    console.error("Could not load the resume link:", err);
+    res.status(500).json({ message: "Could not load the resume link" });
+  }
+});
+
+app.put("/api/admin/resume-link", async (req, res) => {
+  try {
+    const { password, url } = req.body;
+    const admin = await Admin.findOne({ username: "admin" });
+
+    if (!admin || !password || !(await bcrypt.compare(password, admin.password))) {
+      return res.status(401).json({ message: "Admin password is incorrect" });
+    }
+
+    const fileId = typeof url === "string" ? getGoogleDriveFileId(url.trim()) : null;
+    if (!fileId) {
+      return res.status(400).json({
+        message: "Enter a valid Google Drive file-sharing link.",
+      });
+    }
+
+    const setting = await PortfolioSetting.findOneAndUpdate(
+      { key: "resumeUrl" },
+      { $set: { value: url.trim() } },
+      { new: true, upsert: true, runValidators: true }
+    );
+
+    return res.json({ url: setting.value });
+  } catch (err) {
+    console.error("Could not save the resume link:", err);
+    return res.status(500).json({ message: "Could not save the resume link" });
+  }
+});
 
 // =========================
 // TRACK VISITOR
@@ -406,12 +501,23 @@ const resumeFilePath =
 
 app.get(
   "/download/resume",
-  (req, res) => {
+  async (req, res) => {
+    try {
+      const setting = await PortfolioSetting.findOne({ key: "resumeUrl" }).lean();
+      const fileId = setting ? getGoogleDriveFileId(setting.value) : null;
 
-    res.download(
-      resumeFilePath,
-      "YourResume.pdf"
-    );
+      if (fileId) {
+        return res.redirect(
+          302,
+          `https://drive.google.com/uc?export=download&id=${encodeURIComponent(fileId)}`
+        );
+      }
+
+      return res.download(resumeFilePath, "YourResume.pdf");
+    } catch (err) {
+      console.error("Could not redirect to the resume:", err);
+      return res.status(500).json({ message: "Could not download the resume" });
+    }
   }
 );
 

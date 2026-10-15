@@ -1,50 +1,99 @@
-
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-  font-family: 'Outfit';
-
-  }
-
-  
-  
-
-
-  
-@layer{
-  body{
-    @apply m-0 p-0 scroll-smooth;
-    /* to-slate-950 from-60% via-pink-950 from-pink-700 ; */
-  }
-
- 
-  body {
-    @apply bg-light-gradient text-light-text;
-  }
-  
-  body.dark {
-    @apply bg-dark-gradient text-dark-text;
-  }
+:root {
+  font-family: 'Manrope', sans-serif;
+  color: var(--secondary);
+  background: var(--primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  scroll-behavior: smooth;
+  --primary: #f4f7fb;
+  --secondary: #1b2940;
+  --accent-one: #3568e8;
+  --accent-two: #ad4f35;
+  --page: var(--primary);
+  --surface: color-mix(in srgb, var(--primary) 97%, white);
+  --surface-soft: color-mix(in srgb, var(--primary) 90%, var(--secondary));
+  --ink: var(--secondary);
+  --muted: color-mix(in srgb, var(--secondary) 60%, var(--primary));
+  --line: color-mix(in srgb, var(--secondary) 13%, var(--primary));
+  --accent: var(--accent-one);
+  --accent-ink: #ffffff;
+  --header: color-mix(in srgb, var(--primary) 86%, transparent);
 }
 
- 
+* {
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
 
-/** Animations*/ 
-.pulsate-bck{animation:pulsate-bck 2.1s ease-in-out infinite both}
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--page);
+  background-image:
+    radial-gradient(ellipse at 8% 8%, color-mix(in srgb, var(--accent-one) 7%, transparent), transparent 36%),
+    radial-gradient(ellipse at 91% 34%, color-mix(in srgb, var(--accent-two) 5%, transparent), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--page) 96%, var(--accent-one)), var(--page) 52%, color-mix(in srgb, var(--page) 97%, var(--accent-two)));
+  background-attachment: fixed;
+  color: var(--ink);
+  transition: background-color 220ms ease, color 220ms ease;
+}
 
+body.dark {
+  color-scheme: dark;
+  --primary: #0b1220;
+  --secondary: #e8eef8;
+  --accent-one: #82a8ff;
+  --accent-two: #ff9a76;
+  --page: var(--primary);
+  --surface: color-mix(in srgb, var(--primary) 94%, var(--secondary));
+  --surface-soft: color-mix(in srgb, var(--primary) 86%, var(--secondary));
+  --ink: var(--secondary);
+  --muted: color-mix(in srgb, var(--secondary) 63%, var(--primary));
+  --line: color-mix(in srgb, var(--secondary) 17%, var(--primary));
+  --accent: var(--accent-one);
+  --accent-ink: #101827;
+  --header: color-mix(in srgb, var(--primary) 86%, transparent);
+}
 
- @keyframes pulsate-bck{0%{transform:scale(1)}50%{transform:scale(.9)}100%{transform:scale(1)}}
+button,
+input,
+textarea {
+  font: inherit;
+}
 
-.shake-vertical{animation:shake-vertical 15s ease-in-out .5s infinite alternate-reverse forwards}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-two);
+  outline-offset: 4px;
+}
 
- @keyframes shake-vertical{0%,100%{transform:translateY(0)}10%,30%,50%,70%{transform:translateY(-8px)}20%,40%,60%{transform:translateY(8px)}80%{transform:translateY(6.4px)}90%{transform:translateY(-6.4px)}}
+::selection {
+  color: var(--secondary);
+  background: var(--accent-one);
+}
